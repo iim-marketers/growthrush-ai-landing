@@ -4,12 +4,13 @@ import { Kicker } from "./primitives";
 import { Reveal } from "./motion-primitives";
 import { RevenueChart } from "./revenue-chart";
 
-export async function Problem() {
+export async function Problem({ anchor }: { anchor: string }) {
   const { problem } = await getLandingContent();
 
   return (
     <Frame
-      className=" bg-white/2"
+      id={anchor}
+      className="bg-white/2"
       innerClassName="grid items-center gap-9 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12"
     >
       <Reveal className="min-w-0">

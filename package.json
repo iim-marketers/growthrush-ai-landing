@@ -11,7 +11,8 @@
     "payload": "NODE_OPTIONS=--no-deprecation payload",
     "generate:types": "NODE_OPTIONS=--no-deprecation payload generate:types",
     "generate:importmap": "NODE_OPTIONS=--no-deprecation payload generate:importmap",
-    "seed": "NODE_OPTIONS=--no-deprecation payload run src/seed/index.ts"
+    "seed": "NODE_OPTIONS=--no-deprecation payload run src/seed/index.ts",
+    "fix:nav-links": "PAYLOAD_SKIP_SCHEMA_PUSH=true NODE_OPTIONS=--no-deprecation payload run src/scripts/normalize-nav-links.ts"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "3.89.0",

@@ -4,11 +4,12 @@ import { Frame, SectionTitle } from "./frame";
 import { Kicker } from "./primitives";
 import { Reveal } from "./motion-primitives";
 
-export async function Team() {
+export async function Team({ anchor }: { anchor: string }) {
   const { team } = await getLandingContent();
 
   return (
     <Frame
+      id={anchor}
       className="bg-white/2"
       innerClassName="grid items-center gap-11 lg:grid-cols-[0.8fr_1.2fr]"
     >

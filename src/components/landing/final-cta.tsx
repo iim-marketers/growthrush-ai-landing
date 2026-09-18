@@ -5,11 +5,12 @@ import { CtaButton, Kicker } from "./primitives";
 import { Reveal } from "./motion-primitives";
 import { Countdown } from "./countdown";
 
-export async function FinalCta() {
-  const { finalCta, applicationsCloseAt } = await getLandingContent();
+export async function FinalCta({ anchor }: { anchor: string }) {
+  const { finalCta, applicationsCloseAt, anchors } = await getLandingContent();
 
   return (
     <Frame
+      id={anchor}
       className="border-t border-hairline bg-white/2"
       innerClassName="text-center"
       backdrop={
@@ -32,7 +33,11 @@ export async function FinalCta() {
 
         <Countdown closesAt={applicationsCloseAt} className="mx-auto mb-6 max-w-107.5" />
 
-        <CtaButton size="big" className="max-sm:w-full max-sm:text-center">
+        <CtaButton
+          size="big"
+          targetId={anchors.offer}
+          className="max-sm:w-full max-sm:text-center"
+        >
           {finalCta.cta}
         </CtaButton>
 

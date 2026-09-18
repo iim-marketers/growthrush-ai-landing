@@ -3,11 +3,11 @@ import { Frame, SectionTitle } from "./frame";
 import { Kicker } from "./primitives";
 import { Reveal, Stagger, StaggerItem } from "./motion-primitives";
 
-export async function Bonuses() {
+export async function Bonuses({ anchor }: { anchor: string }) {
   const { bonuses } = await getLandingContent();
 
   return (
-    <Frame>
+    <Frame id={anchor}>
       <Reveal>
         <Kicker>{bonuses.kicker}</Kicker>
         <SectionTitle>{bonuses.title}</SectionTitle>

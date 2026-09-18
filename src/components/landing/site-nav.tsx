@@ -5,7 +5,7 @@ import { getLandingContent } from "@/lib/content";
 import { CtaButton } from "./primitives";
 
 export async function SiteNav() {
-  const { brand, navLinks } = await getLandingContent();
+  const { anchors, brand, navLinks } = await getLandingContent();
 
   return (
     <nav className="sticky top-0 z-60 border-b border-hairline bg-background/80 backdrop-blur-xl">
@@ -35,10 +35,12 @@ export async function SiteNav() {
           ))}
         </div>
 
-        <CtaButton className="hidden sm:inline-flex">
+        <CtaButton targetId={anchors.offer} className="hidden sm:inline-flex">
           Get Expansion Blueprint
         </CtaButton>
-        <CtaButton className="sm:hidden">Blueprint</CtaButton>
+        <CtaButton targetId={anchors.offer} className="sm:hidden">
+          Blueprint
+        </CtaButton>
       </div>
     </nav>
   );

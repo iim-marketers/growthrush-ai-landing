@@ -3,11 +3,11 @@ import { Frame, SectionTitle } from "./frame";
 import { CheckIcon, CrossIcon, FitBadge, Kicker } from "./primitives";
 import { Reveal, Stagger, StaggerItem } from "./motion-primitives";
 
-export async function Fit() {
+export async function Fit({ anchor }: { anchor: string }) {
   const { fit } = await getLandingContent();
 
   return (
-    <Frame>
+    <Frame id={anchor}>
       <Reveal>
         <Kicker>{fit.kicker}</Kicker>
         <SectionTitle>{fit.title}</SectionTitle>

@@ -388,11 +388,17 @@ export interface Landing {
     tagline: string;
   };
   /**
-   * Section ID must match an id rendered on the page (engine, tracks, proof, offer, faq).
+   * Shown in the header and the footer, in this order. Any section on the page can be linked here, as long as it currently has content.
    */
   navLinks?:
     | {
+        /**
+         * The wording a visitor sees, e.g. “Tracks”.
+         */
         label: string;
+        /**
+         * The section this link scrolls to, by its target ID. Only sections currently on the page are offered.
+         */
         targetId: string;
         id?: string | null;
       }[]
@@ -418,7 +424,14 @@ export interface Landing {
      */
     legal: string;
   };
+  /**
+   * Renders the "Hero" section, which is always part of the page.
+   */
   hero: {
+    /**
+     * Lower-case letters, numbers and hyphens — this becomes the #anchor a navigation link scrolls to. Leave it blank to use "hero".
+     */
+    targetId?: string | null;
     kicker: string;
     titleLead: string;
     /**
@@ -462,7 +475,11 @@ export interface Landing {
     mapCaption: string;
   };
   /**
-   * The four counters under the hero.
+   * Lower-case letters, numbers and hyphens — this becomes the #anchor a navigation link scrolls to. Leave it blank to use "proof".
+   */
+  proofTargetId?: string | null;
+  /**
+   * The counter strip under the hero. Renders the "Proof stats" section. Remove every entry and the section — along with any navigation link pointing at it — drops off the page.
    */
   proofStats?:
     | {
@@ -475,17 +492,21 @@ export interface Landing {
       }[]
     | null;
   /**
-   * Small label above the client logo row.
+   * Lower-case letters, numbers and hyphens — this becomes the #anchor a navigation link scrolls to. Leave it blank to use "clients".
+   */
+  clientsTargetId?: string | null;
+  /**
+   * Small label above the client logo row. The logos themselves come from the public/logos folder in the codebase, not from here.
    */
   showcaseHeading: string;
-  showcaseBrands?:
-    | {
-        name: string;
-        logo: number | Media;
-        id?: string | null;
-      }[]
-    | null;
+  /**
+   * Renders the "The problem" section, which is always part of the page.
+   */
   problem: {
+    /**
+     * Lower-case letters, numbers and hyphens — this becomes the #anchor a navigation link scrolls to. Leave it blank to use "problem".
+     */
+    targetId?: string | null;
     /**
      * Small eyebrow label above the title.
      */
@@ -507,7 +528,14 @@ export interface Landing {
     chartGood: string;
     chartBad: string;
   };
+  /**
+   * Renders the "Video testimonials" section. Remove every entry and the section — along with any navigation link pointing at it — drops off the page.
+   */
   videoTestimonials: {
+    /**
+     * Lower-case letters, numbers and hyphens — this becomes the #anchor a navigation link scrolls to. Leave it blank to use "testimonials".
+     */
+    targetId?: string | null;
     /**
      * Small eyebrow label above the title.
      */
@@ -547,7 +575,14 @@ export interface Landing {
         }[]
       | null;
   };
+  /**
+   * Renders the "Case studies" section. Remove every entry and the section — along with any navigation link pointing at it — drops off the page.
+   */
   caseStudies: {
+    /**
+     * Lower-case letters, numbers and hyphens — this becomes the #anchor a navigation link scrolls to. Leave it blank to use "case-studies".
+     */
+    targetId?: string | null;
     /**
      * Small eyebrow label above the title.
      */
@@ -574,7 +609,14 @@ export interface Landing {
         }[]
       | null;
   };
+  /**
+   * Renders the "The Engine" section. Remove every entry and the section — along with any navigation link pointing at it — drops off the page.
+   */
   engine: {
+    /**
+     * Lower-case letters, numbers and hyphens — this becomes the #anchor a navigation link scrolls to. Leave it blank to use "engine".
+     */
+    targetId?: string | null;
     /**
      * Small eyebrow label above the title.
      */
@@ -597,7 +639,14 @@ export interface Landing {
         }[]
       | null;
   };
+  /**
+   * Renders the "Tracks" section. Remove every entry and the section — along with any navigation link pointing at it — drops off the page.
+   */
   tracks: {
+    /**
+     * Lower-case letters, numbers and hyphens — this becomes the #anchor a navigation link scrolls to. Leave it blank to use "tracks".
+     */
+    targetId?: string | null;
     /**
      * Small eyebrow label above the title.
      */
@@ -618,7 +667,14 @@ export interface Landing {
       | null;
     note: string;
   };
+  /**
+   * Renders the "Who it's for" section. Remove every entry and the section — along with any navigation link pointing at it — drops off the page.
+   */
   fit: {
+    /**
+     * Lower-case letters, numbers and hyphens — this becomes the #anchor a navigation link scrolls to. Leave it blank to use "fit".
+     */
+    targetId?: string | null;
     /**
      * Small eyebrow label above the title.
      */
@@ -643,7 +699,14 @@ export interface Landing {
         | null;
     };
   };
+  /**
+   * Renders the "Offer" section, which is always part of the page.
+   */
   offer: {
+    /**
+     * Lower-case letters, numbers and hyphens — this becomes the #anchor a navigation link scrolls to. Leave it blank to use "offer".
+     */
+    targetId?: string | null;
     /**
      * Small eyebrow label above the title.
      */
@@ -687,7 +750,14 @@ export interface Landing {
     engagementLead: string;
     engagementNote: string;
   };
+  /**
+   * Renders the "Bonuses" section. Remove every entry and the section — along with any navigation link pointing at it — drops off the page.
+   */
   bonuses: {
+    /**
+     * Lower-case letters, numbers and hyphens — this becomes the #anchor a navigation link scrolls to. Leave it blank to use "bonuses".
+     */
+    targetId?: string | null;
     /**
      * Small eyebrow label above the title.
      */
@@ -704,7 +774,14 @@ export interface Landing {
       | null;
     total: string;
   };
+  /**
+   * Renders the "Team" section. Remove every entry and the section — along with any navigation link pointing at it — drops off the page.
+   */
   team: {
+    /**
+     * Lower-case letters, numbers and hyphens — this becomes the #anchor a navigation link scrolls to. Leave it blank to use "team".
+     */
+    targetId?: string | null;
     /**
      * Small eyebrow label above the title.
      */
@@ -724,7 +801,14 @@ export interface Landing {
      */
     photo?: (number | null) | Media;
   };
+  /**
+   * Renders the "Guarantee" section, which is always part of the page.
+   */
   guarantee: {
+    /**
+     * Lower-case letters, numbers and hyphens — this becomes the #anchor a navigation link scrolls to. Leave it blank to use "guarantee".
+     */
+    targetId?: string | null;
     title: string;
     body: string;
   };
@@ -748,7 +832,14 @@ export interface Landing {
         | null;
     };
   };
+  /**
+   * Renders the "FAQ" section. Remove every entry and the section — along with any navigation link pointing at it — drops off the page.
+   */
   faq: {
+    /**
+     * Lower-case letters, numbers and hyphens — this becomes the #anchor a navigation link scrolls to. Leave it blank to use "faq".
+     */
+    targetId?: string | null;
     /**
      * Small eyebrow label above the title.
      */
@@ -762,7 +853,14 @@ export interface Landing {
         }[]
       | null;
   };
+  /**
+   * Renders the "Final CTA" section, which is always part of the page.
+   */
   finalCta: {
+    /**
+     * Lower-case letters, numbers and hyphens — this becomes the #anchor a navigation link scrolls to. Leave it blank to use "apply".
+     */
+    targetId?: string | null;
     /**
      * Small eyebrow label above the title.
      */
@@ -823,6 +921,7 @@ export interface LandingSelect<T extends boolean = true> {
   hero?:
     | T
     | {
+        targetId?: T;
         kicker?: T;
         titleLead?: T;
         titleAccent?: T;
@@ -852,6 +951,7 @@ export interface LandingSelect<T extends boolean = true> {
             };
         mapCaption?: T;
       };
+  proofTargetId?: T;
   proofStats?:
     | T
     | {
@@ -859,17 +959,12 @@ export interface LandingSelect<T extends boolean = true> {
         label?: T;
         id?: T;
       };
+  clientsTargetId?: T;
   showcaseHeading?: T;
-  showcaseBrands?:
-    | T
-    | {
-        name?: T;
-        logo?: T;
-        id?: T;
-      };
   problem?:
     | T
     | {
+        targetId?: T;
         kicker?: T;
         title?: T;
         body?: T;
@@ -888,6 +983,7 @@ export interface LandingSelect<T extends boolean = true> {
   videoTestimonials?:
     | T
     | {
+        targetId?: T;
         kicker?: T;
         title?: T;
         lede?: T;
@@ -915,6 +1011,7 @@ export interface LandingSelect<T extends boolean = true> {
   caseStudies?:
     | T
     | {
+        targetId?: T;
         kicker?: T;
         title?: T;
         lede?: T;
@@ -938,6 +1035,7 @@ export interface LandingSelect<T extends boolean = true> {
   engine?:
     | T
     | {
+        targetId?: T;
         kicker?: T;
         title?: T;
         lede?: T;
@@ -954,6 +1052,7 @@ export interface LandingSelect<T extends boolean = true> {
   tracks?:
     | T
     | {
+        targetId?: T;
         kicker?: T;
         title?: T;
         items?:
@@ -974,6 +1073,7 @@ export interface LandingSelect<T extends boolean = true> {
   fit?:
     | T
     | {
+        targetId?: T;
         kicker?: T;
         title?: T;
         yes?:
@@ -1002,6 +1102,7 @@ export interface LandingSelect<T extends boolean = true> {
   offer?:
     | T
     | {
+        targetId?: T;
         kicker?: T;
         title?: T;
         slots?:
@@ -1038,6 +1139,7 @@ export interface LandingSelect<T extends boolean = true> {
   bonuses?:
     | T
     | {
+        targetId?: T;
         kicker?: T;
         title?: T;
         items?:
@@ -1054,6 +1156,7 @@ export interface LandingSelect<T extends boolean = true> {
   team?:
     | T
     | {
+        targetId?: T;
         kicker?: T;
         title?: T;
         body?:
@@ -1067,6 +1170,7 @@ export interface LandingSelect<T extends boolean = true> {
   guarantee?:
     | T
     | {
+        targetId?: T;
         title?: T;
         body?: T;
       };
@@ -1099,6 +1203,7 @@ export interface LandingSelect<T extends boolean = true> {
   faq?:
     | T
     | {
+        targetId?: T;
         kicker?: T;
         title?: T;
         items?:
@@ -1112,6 +1217,7 @@ export interface LandingSelect<T extends boolean = true> {
   finalCta?:
     | T
     | {
+        targetId?: T;
         kicker?: T;
         title?: T;
         body?: T;

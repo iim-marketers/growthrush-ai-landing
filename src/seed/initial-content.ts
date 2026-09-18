@@ -57,20 +57,6 @@ export const proofStats = [
   { value: "₹250 Cr", label: "Channel revenue influenced" },
 ] as const;
 
-export const showcaseBrands = [
-  { name: "Haldiram's", src: "/logos/haldiram.png" },
-  { name: "EY", src: "/logos/ey.png" },
-  { name: "Emami", src: "/logos/emami.png" },
-  { name: "ITC", src: "/logos/itc.png" },
-  { name: "Joy", src: "/logos/joy.png" },
-  { name: "Nephrocare", src: "/logos/nephrocare.png" },
-  { name: "Adyant Ayurveda", src: "/logos/adyant-ayurveda.png" },
-  { name: "Emporium Solutions", src: "/logos/emporium-solutions.png" },
-  { name: "Pepsi", src: "/logos/pepsi.png" },
-  { name: "Magik LED", src: "/logos/magik-led.png" },
-  { name: "Century Ply", src: "/logos/centuryply.png" },
-] as const;
-
 export const problem = {
   kicker: "Why expansion stalls",
   title:

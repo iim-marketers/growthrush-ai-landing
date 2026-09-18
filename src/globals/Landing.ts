@@ -1,7 +1,11 @@
 import type { GlobalConfig } from "payload";
 
+import { followAnchorRenames } from "@/lib/follow-anchor-renames";
 import { revalidateLanding } from "@/lib/revalidate-landing";
 import { pointsPanel, sectionHeading, statList, stringList } from "./fields";
+import { getSection, sectionAdminNote } from "@/lib/sections";
+import { anchorField } from "./anchor-field";
+import { navLinksField } from "./nav-links";
 
 export const Landing: GlobalConfig = {
   slug: "landing",
@@ -13,6 +17,7 @@ export const Landing: GlobalConfig = {
   },
   access: { read: () => true },
   hooks: {
+    beforeValidate: [followAnchorRenames],
     afterChange: [revalidateLanding],
   },
   fields: [
@@ -42,26 +47,7 @@ export const Landing: GlobalConfig = {
                 },
               ],
             },
-            {
-              name: "navLinks",
-              type: "array",
-              label: "Navigation links",
-              minRows: 1,
-              admin: {
-                initCollapsed: true,
-                description:
-                  "Section ID must match an id rendered on the page (engine, tracks, proof, offer, faq).",
-              },
-              fields: [
-                {
-                  type: "row",
-                  fields: [
-                    { name: "label", type: "text", required: true, admin: { width: "50%" } },
-                    { name: "targetId", type: "text", required: true, admin: { width: "50%" } },
-                  ],
-                },
-              ],
-            },
+            navLinksField,
             {
               name: "announcement",
               type: "group",
@@ -116,7 +102,9 @@ export const Landing: GlobalConfig = {
             {
               name: "hero",
               type: "group",
+              admin: { description: sectionAdminNote("hero") },
               fields: [
+                anchorField(getSection("hero")!),
                 { name: "kicker", type: "text", required: true },
                 {
                   type: "row",
@@ -165,35 +153,22 @@ export const Landing: GlobalConfig = {
                 { name: "mapCaption", type: "text", required: true },
               ],
             },
-            statList("proofStats", "Proof stats", "The four counters under the hero."),
+            anchorField(getSection("proof")!),
+            statList(
+              "proofStats",
+              "Proof stats",
+              `The counter strip under the hero. ${sectionAdminNote("proof")}`,
+            ),
+            anchorField(getSection("clients")!),
             {
               name: "showcaseHeading",
               type: "text",
               required: true,
               label: "Logo strip heading",
-              admin: { description: "Small label above the client logo row." },
-            },
-            {
-              name: "showcaseBrands",
-              type: "array",
-              label: "Client logo strip",
-              minRows: 1,
-              admin: { initCollapsed: true },
-              fields: [
-                {
-                  type: "row",
-                  fields: [
-                    { name: "name", type: "text", required: true, admin: { width: "50%" } },
-                    {
-                      name: "logo",
-                      type: "upload",
-                      relationTo: "media",
-                      required: true,
-                      admin: { width: "50%" },
-                    },
-                  ],
-                },
-              ],
+              admin: {
+                description:
+                  "Small label above the client logo row. The logos themselves come from the public/logos folder in the codebase, not from here.",
+              },
             },
           ],
         },
@@ -203,7 +178,9 @@ export const Landing: GlobalConfig = {
             {
               name: "problem",
               type: "group",
+              admin: { description: sectionAdminNote("problem") },
               fields: [
+                anchorField(getSection("problem")!),
                 ...sectionHeading(),
                 { name: "body", type: "textarea", required: true },
                 stringList("wall", "The wall", "What goes wrong when brands scale unaided."),
@@ -223,7 +200,9 @@ export const Landing: GlobalConfig = {
               name: "videoTestimonials",
               type: "group",
               label: "Video testimonials",
+              admin: { description: sectionAdminNote("testimonials") },
               fields: [
+                anchorField(getSection("testimonials")!),
                 ...sectionHeading({ lede: true }),
                 {
                   name: "items",
@@ -265,7 +244,9 @@ export const Landing: GlobalConfig = {
             {
               name: "caseStudies",
               type: "group",
+              admin: { description: sectionAdminNote("case-studies") },
               fields: [
+                anchorField(getSection("case-studies")!),
                 ...sectionHeading({ lede: true }),
                 {
                   name: "items",
@@ -295,7 +276,9 @@ export const Landing: GlobalConfig = {
             {
               name: "engine",
               type: "group",
+              admin: { description: sectionAdminNote("engine") },
               fields: [
+                anchorField(getSection("engine")!),
                 ...sectionHeading({ lede: true }),
                 {
                   name: "pillars",
@@ -330,7 +313,9 @@ export const Landing: GlobalConfig = {
             {
               name: "tracks",
               type: "group",
+              admin: { description: sectionAdminNote("tracks") },
               fields: [
+                anchorField(getSection("tracks")!),
                 ...sectionHeading(),
                 {
                   name: "items",
@@ -354,7 +339,9 @@ export const Landing: GlobalConfig = {
             {
               name: "fit",
               type: "group",
+              admin: { description: sectionAdminNote("fit") },
               fields: [
+                anchorField(getSection("fit")!),
                 ...sectionHeading(),
                 pointsPanel("yes", "This is for you if"),
                 pointsPanel("no", "This is not for you if"),
@@ -363,7 +350,9 @@ export const Landing: GlobalConfig = {
             {
               name: "offer",
               type: "group",
+              admin: { description: sectionAdminNote("offer") },
               fields: [
+                anchorField(getSection("offer")!),
                 ...sectionHeading(),
                 {
                   name: "slots",
@@ -412,7 +401,9 @@ export const Landing: GlobalConfig = {
             {
               name: "bonuses",
               type: "group",
+              admin: { description: sectionAdminNote("bonuses") },
               fields: [
+                anchorField(getSection("bonuses")!),
                 ...sectionHeading(),
                 {
                   name: "items",
@@ -442,7 +433,9 @@ export const Landing: GlobalConfig = {
             {
               name: "team",
               type: "group",
+              admin: { description: sectionAdminNote("team") },
               fields: [
+                anchorField(getSection("team")!),
                 ...sectionHeading(),
                 stringList("body", "Paragraphs", "Each entry renders as its own paragraph."),
                 {
@@ -459,7 +452,9 @@ export const Landing: GlobalConfig = {
             {
               name: "guarantee",
               type: "group",
+              admin: { description: sectionAdminNote("guarantee") },
               fields: [
+                anchorField(getSection("guarantee")!),
                 { name: "title", type: "text", required: true },
                 { name: "body", type: "textarea", required: true },
               ],
@@ -473,7 +468,9 @@ export const Landing: GlobalConfig = {
             {
               name: "faq",
               type: "group",
+              admin: { description: sectionAdminNote("faq") },
               fields: [
+                anchorField(getSection("faq")!),
                 ...sectionHeading(),
                 {
                   name: "items",
@@ -490,7 +487,9 @@ export const Landing: GlobalConfig = {
             {
               name: "finalCta",
               type: "group",
+              admin: { description: sectionAdminNote("apply") },
               fields: [
+                anchorField(getSection("apply")!),
                 ...sectionHeading(),
                 { name: "body", type: "textarea", required: true },
                 { name: "cta", type: "text", required: true },

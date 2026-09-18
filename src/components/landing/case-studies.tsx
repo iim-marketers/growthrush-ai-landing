@@ -3,11 +3,11 @@ import { Frame, SectionLede, SectionTitle } from "./frame";
 import { Kicker } from "./primitives";
 import { Reveal, Stagger, StaggerItem } from "./motion-primitives";
 
-export async function CaseStudies() {
+export async function CaseStudies({ anchor }: { anchor: string }) {
   const { caseStudies } = await getLandingContent();
 
   return (
-    <Frame className="bg-white/2">
+    <Frame id={anchor} className="bg-white/2">
       <Reveal>
         <Kicker>{caseStudies.kicker}</Kicker>
         <SectionTitle>{caseStudies.title}</SectionTitle>

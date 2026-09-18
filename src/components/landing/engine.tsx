@@ -3,11 +3,11 @@ import { Frame, SectionLede, SectionTitle } from "./frame";
 import { Kicker } from "./primitives";
 import { Reveal, Stagger, StaggerItem } from "./motion-primitives";
 
-export async function Engine() {
+export async function Engine({ anchor }: { anchor: string }) {
   const { engine } = await getLandingContent();
 
   return (
-    <Frame id="engine" className="bg-white/2">
+    <Frame id={anchor} className="bg-white/2">
       <Reveal>
         <Kicker>{engine.kicker}</Kicker>
         <SectionTitle>{engine.title}</SectionTitle>

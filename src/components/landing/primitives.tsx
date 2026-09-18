@@ -27,12 +27,13 @@ export function Kicker({
 
 export function CtaButton({
   children,
-  targetId = "offer",
+  targetId,
   size = "default",
   className,
 }: {
   children: ReactNode;
-  targetId?: string;
+  /** The anchor to scroll to — an editor can rename any of them. */
+  targetId: string;
   size?: "default" | "big";
   className?: string;
 }) {

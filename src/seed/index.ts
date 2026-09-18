@@ -64,11 +64,6 @@ if (userCount === 0) {
 const fromPublic = (p: string) => path.join(projectRoot, "public", p.replace(/^\//, ""));
 const fromAssets = (p: string) => path.join(projectRoot, "src/seed/assets", p);
 
-const brandLogos = new Map<string, number>();
-for (const brand of c.showcaseBrands) {
-  brandLogos.set(brand.name, await upload(fromPublic(brand.src), brand.name));
-}
-
 const credentialLogo = await upload(
   fromPublic(c.hero.credential.logo),
   c.hero.credential.logoAlt,
@@ -111,10 +106,6 @@ await payload.updateGlobal({
     },
     proofStats: stats(c.proofStats),
     showcaseHeading: "Expansion experience across brands",
-    showcaseBrands: c.showcaseBrands.map((brand) => ({
-      name: brand.name,
-      logo: brandLogos.get(brand.name)!,
-    })),
 
     problem: { ...c.problem, wall: list(c.problem.wall) },
     videoTestimonials: {

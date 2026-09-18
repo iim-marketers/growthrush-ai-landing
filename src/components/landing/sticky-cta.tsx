@@ -6,8 +6,10 @@ import { CtaButton } from "./primitives";
 import { cn } from "@/lib/utils";
 
 export function StickyCta({
+  ctaTarget,
   stickyBar,
 }: {
+  ctaTarget: string;
   stickyBar: LandingContent["stickyBar"];
 }) {
   const [show, setShow] = useState(false);
@@ -44,7 +46,9 @@ export function StickyCta({
             {stickyBar.sub}
           </span>
         </div>
-        <CtaButton className="shrink-0">{stickyBar.cta}</CtaButton>
+        <CtaButton targetId={ctaTarget} className="shrink-0">
+          {stickyBar.cta}
+        </CtaButton>
       </div>
     </div>
   );

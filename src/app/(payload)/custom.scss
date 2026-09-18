@@ -205,3 +205,20 @@ html[data-theme="light"] {
     outline-offset: -1px;
   }
 }
+
+// --- Landing → navigation link rows -----------------------------------------
+.gr-nav-row {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.gr-nav-row__label {
+  font-weight: 600;
+}
+
+.gr-nav-row__target {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--theme-elevation-500);
+}
