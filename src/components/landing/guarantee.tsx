@@ -1,10 +1,12 @@
 import { ShieldCheck } from "lucide-react";
-import { guarantee, inaction } from "@/lib/landing-data";
+import { getLandingContent } from "@/lib/content";
 import { Frame } from "./frame";
 import { CheckIcon, CrossIcon } from "./primitives";
 import { Reveal, Stagger, StaggerItem } from "./motion-primitives";
 
-export function Guarantee() {
+export async function Guarantee() {
+  const { guarantee, inaction } = await getLandingContent();
+
   return (
     <Frame>
       <Reveal>

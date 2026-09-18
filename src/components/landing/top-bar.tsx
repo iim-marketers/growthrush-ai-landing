@@ -1,10 +1,16 @@
 "use client";
 
-import { announcement } from "@/lib/landing-data";
+import type { LandingContent } from "@/lib/content";
 import { useCountdown } from "./use-countdown";
 
-export function TopBar() {
-  const left = useCountdown();
+export function TopBar({
+  announcement,
+  closesAt,
+}: {
+  announcement: LandingContent["announcement"];
+  closesAt: string;
+}) {
+  const left = useCountdown(closesAt);
 
   return (
     <div className="border-b border-hairline bg-[#070c1a] text-[13.5px]">

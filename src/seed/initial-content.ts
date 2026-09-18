@@ -405,32 +405,6 @@ export const finalCta = {
   trust: ["Fixed scope", "Credited to the engagement", "Limited slots"],
 } as const;
 
-export const ctaBands = {
-  afterTestimonials: {
-    title: "Not sure where your expansion is leaking?",
-    body: "The Blueprint maps every gap before you spend a rupee.",
-    cta: "Get your Expansion Blueprint",
-  },
-  afterEngine: {
-    cta: "Build my distributor & franchise network",
-    sub: "Fixed-scope Blueprint · credited to the engagement",
-  },
-  afterTracks: {
-    cta: "Get the same system for your brand",
-    sub: "Start with your Expansion Blueprint",
-  },
-  afterBonuses: {
-    title: "Start today and keep ₹1,25,000 in tools.",
-    body: "The Blueprint fee is credited to the full engagement.",
-    cta: "Claim the Blueprint + bonuses",
-  },
-  afterInaction: {
-    title: "Every quarter you wait, expansion gets costlier.",
-    body: "Claim your strongest territories and partners first.",
-    cta: "Start now — get the Blueprint",
-  },
-} as const;
-
 export const stickyBar = {
   title: "Get your Expansion Blueprint",
   sub: "Fixed scope · credited to the engagement · limited slots",

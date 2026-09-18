@@ -1,9 +1,11 @@
-import { tracks } from "@/lib/landing-data";
+import { getLandingContent } from "@/lib/content";
 import { Frame, SectionTitle } from "./frame";
 import { CheckIcon, Kicker } from "./primitives";
 import { Reveal, Stagger, StaggerItem } from "./motion-primitives";
 
-export function Tracks() {
+export async function Tracks() {
+  const { tracks } = await getLandingContent();
+
   return (
     <Frame id="tracks">
       <Reveal>

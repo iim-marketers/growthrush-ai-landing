@@ -1,9 +1,11 @@
-import { hero } from "@/lib/landing-data";
+import { getLandingContent } from "@/lib/content";
 import { Frame } from "./frame";
 import { CheckIcon, CtaButton, Kicker } from "./primitives";
 import { NetworkMap } from "./network-map";
 
-export function Hero() {
+export async function Hero() {
+  const { hero } = await getLandingContent();
+
   return (
     <Frame
       className="pt-[clamp(2.4rem,5vw,4rem)] pb-[clamp(2.75rem,5vw,5rem)]"

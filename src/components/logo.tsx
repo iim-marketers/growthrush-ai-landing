@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { brand } from "@/lib/landing-data";
+import { getLandingContent } from "@/lib/content";
 
 const wordmark = {
   light: "/brand/wordmark-light.png",
@@ -13,7 +13,7 @@ const sizes = {
   lg: "h-8 sm:h-10",
 } as const;
 
-export function Logo({
+export async function Logo({
   size = "sm",
   tone = "light",
   className,
@@ -24,6 +24,8 @@ export function Logo({
   className?: string;
   eager?: boolean;
 }) {
+  const { brand } = await getLandingContent();
+
   return (
     <div className={cn("flex items-center", className)}>
       <Image

@@ -1,10 +1,12 @@
-import { offer } from "@/lib/landing-data";
+import { getLandingContent } from "@/lib/content";
 import { Frame, SectionTitle } from "./frame";
 import { CheckIcon, CtaButton, Kicker } from "./primitives";
 import { Reveal } from "./motion-primitives";
 import { Countdown } from "./countdown";
 
-export function Offer() {
+export async function Offer() {
+  const { offer, applicationsCloseAt } = await getLandingContent();
+
   return (
     <Frame id="offer" className="bg-white/2">
       <Reveal>
@@ -71,7 +73,7 @@ export function Offer() {
             </div>
             <p className="mb-5 text-sm text-subtle">{offer.credit}</p>
 
-            <Countdown className="mb-5" />
+            <Countdown closesAt={applicationsCloseAt} className="mb-5" />
 
             <CtaButton size="big" className="w-full text-center">
               {offer.cta}
@@ -86,7 +88,7 @@ export function Offer() {
 
       <Reveal>
         <p className="mt-6 max-w-[44em] text-base text-subtle">
-          <b className="text-ink">The done-for-you engagement</b> —{" "}
+          <b className="text-ink">{offer.engagementLead}</b> —{" "}
           {offer.engagementNote}
         </p>
       </Reveal>

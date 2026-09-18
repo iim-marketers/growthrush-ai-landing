@@ -1,0 +1,203 @@
+html[data-theme="light"] {
+  --gr-brand: #4361d8;
+  --gr-brand-strong: #2f49b5;
+  --gr-page: #f5f6fa;
+  --gr-panel: #ffffff;
+  --gr-brand-soft: rgba(67, 97, 216, 0.1);
+
+  --theme-bg: var(--gr-page);
+  --theme-bg-color: var(--gr-page);
+  --theme-elevation-0: var(--gr-panel);
+  --theme-input-bg: var(--gr-panel);
+  --theme-border-color: #e3e6ef;
+
+  --theme-success-500: var(--gr-brand);
+  --theme-success-550: var(--gr-brand-strong);
+  --theme-success-600: var(--gr-brand-strong);
+
+  color-scheme: light;
+}
+
+// --- Auth screens -----------------------------------------------------------
+.template-minimal__wrap {
+  padding: 2.5rem 2rem;
+  border: 1px solid var(--theme-border-color);
+  border-radius: 14px;
+  background: var(--gr-panel);
+  box-shadow: 0 10px 30px rgba(18, 26, 56, 0.08);
+}
+
+.login__brand {
+  margin-bottom: 2rem;
+}
+
+// --- Account & user edit ----------------------------------------------------
+.auth-fields {
+  padding: 0;
+  background: transparent;
+}
+
+.collection-edit__auth {
+  position: relative;
+  margin-bottom: calc(var(--base) * 2);
+  padding-bottom: calc(var(--base) * 2);
+  border-radius: 0;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: calc(var(--gutter-h) * -1);
+    width: calc(100% + var(--base) * 5);
+    height: 1px;
+    background: var(--theme-elevation-100);
+  }
+}
+
+// --- Branding ---------------------------------------------------------------
+.gr-admin-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+
+  img {
+    width: auto;
+    height: 1.9rem;
+  }
+
+  span {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--theme-elevation-500);
+  }
+}
+
+.gr-admin-icon {
+  width: 1.65rem;
+  height: 1.65rem;
+  border-radius: 6px;
+}
+
+// --- Nav --------------------------------------------------------------------
+.nav {
+  background: var(--gr-panel);
+  border-right-color: var(--theme-border-color);
+}
+
+.nav-group {
+  margin-bottom: calc(var(--base) * 0.75);
+}
+
+.nav-group__label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.nav__link {
+  padding-block: 0.45rem;
+  padding-inline: 0.625rem;
+  margin-inline: -0.625rem;
+  border-radius: 8px;
+  color: var(--theme-elevation-700);
+  transition:
+    background-color 0.12s ease,
+    color 0.12s ease;
+}
+
+.nav a.nav__link:hover,
+.nav a.nav__link:focus-visible {
+  text-decoration: none;
+  background: var(--theme-elevation-50);
+  color: var(--theme-elevation-900);
+}
+
+.nav__link:has(.nav__link-indicator) {
+  background: var(--gr-brand-soft);
+  color: var(--gr-brand-strong);
+}
+
+.nav__link-indicator {
+  display: none;
+}
+
+.nav__controls {
+  border-top: 1px solid var(--theme-border-color);
+}
+
+.gr-logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--theme-border-color);
+  border-radius: 8px;
+  color: var(--theme-elevation-700);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition:
+    background-color 0.12s ease,
+    border-color 0.12s ease,
+    color 0.12s ease;
+
+  &:hover,
+  &:focus-visible {
+    background: var(--theme-elevation-50);
+    border-color: var(--theme-elevation-250);
+    color: var(--theme-elevation-900);
+    text-decoration: none;
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+// --- Password reveal --------------------------------------------------------
+.gr-reveal-host {
+  position: absolute;
+  top: 0;
+  inset-inline-end: 0;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding-inline-end: 0.3rem;
+}
+
+.field-type.password input,
+.field-type.confirm-password input {
+  padding-inline-end: 2.5rem;
+}
+
+.gr-reveal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--theme-elevation-400);
+  cursor: pointer;
+  transition:
+    background-color 0.12s ease,
+    color 0.12s ease;
+
+  &:hover {
+    background: var(--theme-elevation-100);
+    color: var(--theme-elevation-800);
+  }
+
+  &:focus-visible {
+    outline: var(--accessibility-outline);
+    outline-offset: -1px;
+  }
+}

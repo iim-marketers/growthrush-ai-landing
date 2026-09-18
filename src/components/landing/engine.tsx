@@ -1,9 +1,11 @@
-import { engine } from "@/lib/landing-data";
+import { getLandingContent } from "@/lib/content";
 import { Frame, SectionLede, SectionTitle } from "./frame";
 import { Kicker } from "./primitives";
 import { Reveal, Stagger, StaggerItem } from "./motion-primitives";
 
-export function Engine() {
+export async function Engine() {
+  const { engine } = await getLandingContent();
+
   return (
     <Frame id="engine" className="bg-white/2">
       <Reveal>

@@ -1,9 +1,11 @@
-import { proofStats } from "@/lib/landing-data";
+import { getLandingContent } from "@/lib/content";
 import { FlipNumber } from "./flip-number";
 import { Frame } from "./frame";
 import { Reveal, Stagger, StaggerItem } from "./motion-primitives";
 
-export function ProofStats() {
+export async function ProofStats() {
+  const { proofStats } = await getLandingContent();
+
   return (
     <Frame
       id="proof"
