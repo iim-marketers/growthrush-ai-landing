@@ -11,7 +11,10 @@ export function FinalCta() {
       className="border-t border-hairline bg-white/2"
       innerClassName="text-center"
       backdrop={
-        <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+        <div
+          className="pointer-events-none absolute inset-0 overflow-hidden"
+          aria-hidden
+        >
           <div className="glow glow-warm -top-40 left-1/2 h-115 w-115 -translate-x-1/2" />
         </div>
       }
@@ -25,20 +28,20 @@ export function FinalCta() {
           {finalCta.body}
         </p>
 
-        <Countdown className="mx-auto mb-6 max-w-[26.875rem]" />
+        <Countdown className="mx-auto mb-6 max-w-107.5" />
 
         <CtaButton size="big" className="max-sm:w-full max-sm:text-center">
           {finalCta.cta}
         </CtaButton>
 
-        <div className="mt-6 flex flex-wrap justify-center gap-x-6.5 gap-y-2 text-sm text-faint">
+        <ul className="hidden mx-auto mt-6 md:flex w-fit flex-col gap-2.5 text-left text-sm text-faint sm:w-auto sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-6.5 sm:gap-y-2">
           {finalCta.trust.map((item) => (
-            <span key={item} className="flex items-center gap-1.75">
-              <Check className="size-4 text-orange" strokeWidth={3} />
+            <li key={item} className="flex items-center gap-1.75">
+              <Check className="size-4 shrink-0 text-orange" strokeWidth={3} />
               {item}
-            </span>
+            </li>
           ))}
-        </div>
+        </ul>
       </Reveal>
     </Frame>
   );

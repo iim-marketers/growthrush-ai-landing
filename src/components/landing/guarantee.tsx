@@ -8,18 +8,14 @@ export function Guarantee() {
   return (
     <Frame>
       <Reveal>
-        <div className="flex items-start gap-4.5 rounded-2xl border border-success bg-success/10 px-6 py-7 sm:px-8">
-          <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-success">
-            <ShieldCheck className="size-5.5 text-background" />
-          </span>
-          <div>
-            <h3 className="mb-1.5 text-xl font-extrabold">
-              {guarantee.title}
-            </h3>
-            <p className="max-w-[52em] text-[15.5px] text-subtle">
-              {guarantee.body}
-            </p>
+        <div className="rounded-2xl border border-success bg-success/10 px-6 py-7 sm:px-8">
+          <div className="flex items-center gap-4.5">
+            <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-success">
+              <ShieldCheck className="size-5.5 text-background" />
+            </span>
+            <h3 className="text-xl font-extrabold">{guarantee.title}</h3>
           </div>
+          <p className="mt-3.5 text-[15.5px] text-subtle">{guarantee.body}</p>
         </div>
       </Reveal>
 
@@ -31,7 +27,10 @@ export function Guarantee() {
             </h3>
             <ul className="grid gap-3">
               {inaction.wait.points.map((point) => (
-                <li key={point} className="flex gap-2.5 text-[15px] text-subtle">
+                <li
+                  key={point}
+                  className="flex gap-2.5 text-[15px] text-subtle"
+                >
                   <CrossIcon className="mt-0.5" />
                   {point}
                 </li>
@@ -47,7 +46,10 @@ export function Guarantee() {
             </h3>
             <ul className="grid gap-3">
               {inaction.act.points.map((point) => (
-                <li key={point} className="flex gap-2.5 text-[15px] text-subtle">
+                <li
+                  key={point}
+                  className="flex gap-2.5 text-[15px] text-subtle"
+                >
                   <CheckIcon className="mt-0.5" />
                   {point}
                 </li>
