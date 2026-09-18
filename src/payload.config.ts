@@ -13,6 +13,9 @@ import { Landing } from "./globals/Landing";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
+// Neon hands out both a pooled and a direct URL. Payload pushes schema changes
+// in development, which PgBouncer's transaction pooling cannot carry, so prefer
+// the direct connection whenever it is available.
 const connectionString =
   process.env.DATABASE_URL_UNPOOLED ||
   process.env.DATABASE_URL ||
@@ -56,7 +59,8 @@ export default buildConfig({
   },
   db: postgresAdapter({
     pool: { connectionString },
-    push: false,
+    // Lets a repair script read the database before Payload reshapes it.
+    push: process.env.PAYLOAD_SKIP_SCHEMA_PUSH !== "true",
   }),
   sharp,
   plugins: [

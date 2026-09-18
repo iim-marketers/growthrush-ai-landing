@@ -22,8 +22,7 @@ Matched to the main `growthrush-ai` app so the two stay consistent:
 ```bash
 cp .env.example .env          # then fill in the values described there
 pnpm install
-pnpm migrate                  # builds the database schema
-pnpm seed                     # writes the launch copy into the CMS (once)
+pnpm seed                     # migrates the launch copy into the CMS (once)
 pnpm dev                      # http://localhost:3000 — admin at /admin
 ```
 
@@ -33,20 +32,16 @@ global, uploads the stand-in artwork in `src/seed/assets/` into the media
 library, and creates the admin user from `ADMIN_EMAIL` / `ADMIN_PASSWORD`. It is safe to re-run: media is matched by filename, the user is
 only created when none exists, and the global is overwritten wholesale.
 
-Payload reads `DATABASE_URL_UNPOOLED` in preference to `DATABASE_URL`. Migrations
-run DDL, and PgBouncer's transaction pooling cannot carry the session state that
-needs.
+Payload reads `DATABASE_URL_UNPOOLED` in preference to `DATABASE_URL`. It pushes
+schema changes automatically in development, and PgBouncer's transaction pooling
+cannot carry the session state that needs.
 
 Other scripts:
 
 ```bash
-pnpm build                    # runs pnpm migrate, then the production build
-                              # (needs DATABASE_URL — the page is prerendered
-                              # from the database)
+pnpm build                    # production build (needs DATABASE_URL — the page
+                              # is prerendered from the database)
 pnpm lint
-pnpm migrate                  # apply pending migrations
-pnpm migrate:create <name>    # write a migration for the current config
-pnpm migrate:baseline         # adopt migrations on an already-pushed database
 pnpm generate:types           # regenerate src/payload-types.ts after a schema change
 pnpm generate:importmap       # regenerate the admin import map after adding a custom component
 pnpm fix:nav-links            # drop navigation links whose section is gone
@@ -55,7 +50,9 @@ pnpm fix:nav-links            # drop navigation links whose section is gone
 `pnpm fix:nav-links` repairs navigation links that point at an anchor the page
 no longer has. The admin will not save one and the page will not render one, so
 this is only needed for links written straight into the database, or stored
-before these rules existed. It does nothing when every link is already valid.
+before these rules existed. It runs with the schema push disabled — set
+`PAYLOAD_SKIP_SCHEMA_PUSH=true` for any script that has to read the database
+before Payload reshapes it — and does nothing when every link is already valid.
 
 ## Theme
 
@@ -194,28 +191,9 @@ calls `revalidatePath("/")` on every publish.
 
 ### Changing the content model
 
-Edit [`src/globals/Landing.ts`](src/globals/Landing.ts), then:
-
-```bash
-pnpm generate:types                      # refresh src/payload-types.ts
-pnpm migrate:create <what-you-changed>   # write the SQL into src/migrations
-pnpm migrate                             # apply it locally
-```
-
-Then update the mapping in [`src/lib/content.ts`](src/lib/content.ts) and commit
-`src/migrations` alongside the change.
-
-Payload's development schema push is deliberately off (`push: false` in
-[`src/payload.config.ts`](src/payload.config.ts)). Push only ever reshapes the
-database a developer happens to be pointed at, and `next build` never pushes at
-all — so a column added that way exists wherever dev ran and nowhere else, and
-the deploy dies prerendering `/` with `column "…" does not exist`. `pnpm build`
-runs `payload migrate` first, so every database is brought up to the schema the
-committed code expects before the page is rendered from it.
-
-A database whose schema was created by the old push flow has no record of the
-migrations it already satisfies. Run `pnpm migrate:baseline` against it once —
-it marks them applied and clears the push marker, without touching content.
+Edit [`src/globals/Landing.ts`](src/globals/Landing.ts), then run
+`pnpm generate:types` and update the mapping in `src/lib/content.ts`. Payload
+generates the Postgres migration on next boot in dev.
 
 ### Media storage
 
