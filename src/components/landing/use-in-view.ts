@@ -2,13 +2,6 @@
 
 import { useEffect, useRef, useState, type RefObject } from "react";
 
-/**
- * Fires once, the first time the element scrolls into view.
- *
- * Returns the ref to attach and whether it has been seen yet. The state is only
- * set from the observer callback, never synchronously in the effect body, so it
- * does not trigger a cascading render on mount.
- */
 export function useInView<T extends Element>(
   threshold = 0.25,
 ): [RefObject<T | null>, boolean] {

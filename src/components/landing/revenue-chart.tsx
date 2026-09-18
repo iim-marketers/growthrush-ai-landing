@@ -8,22 +8,11 @@ import { useInView } from "./use-in-view";
 const GOOD_PATH = "M64 300 C160 300 210 240 285 190 S420 92 484 55";
 const BAD_PATH = "M64 300 C160 300 220 288 300 285 S430 289 484 292";
 
-/**
- * Revenue-vs-time chart: the two lines draw themselves in when the box scrolls
- * into view, then a dot travels the winning curve. Static under
- * `prefers-reduced-motion`.
- */
 export function RevenueChart() {
   const [ref, seen] = useInView<HTMLDivElement>(0.3);
   const reduced = Boolean(useReducedMotion());
   const revealed = reduced || seen;
 
-  /*
-   * Each line is normalised with `pathLength={1}`, so one dash of length 1
-   * covers the whole curve whatever its real geometry. Offsetting that dash by
-   * 1 hides the line; animating the offset to 0 draws it. No measuring pass,
-   * and so no flash of a fully drawn line before an effect can run.
-   */
   const lineStyle = (i: number) =>
     reduced
       ? undefined

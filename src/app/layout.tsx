@@ -18,7 +18,7 @@ const outfit = Outfit({
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://get.growthrush.ai";
-const SITE_NAME = "get.growthrush.ai";
+const SITE_NAME = "growthrush.ai";
 const DESCRIPTION =
   "Done-for-you national expansion. We install the distributor network, franchise model, territory plan and SOPs so your brand scales without guessing.";
 
@@ -31,10 +31,6 @@ export const metadata: Metadata = {
   description: DESCRIPTION,
   applicationName: SITE_NAME,
   keywords: [
-    "growthrush",
-    "growthrush ai",
-    "growthrush-ai",
-    "growthrush ai landing",
     "national expansion",
     "distributor network",
     "franchise model",

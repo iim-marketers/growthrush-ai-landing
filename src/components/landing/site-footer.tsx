@@ -1,7 +1,5 @@
-import { ArrowUp } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { ScrollLink } from "@/components/scroll-link";
-import { ScrollToTop } from "@/components/scroll-top";
 import { brand, footer, navLinks } from "@/lib/landing-data";
 
 export function SiteFooter() {
@@ -16,9 +14,8 @@ export function SiteFooter() {
         className="glow glow-brand pointer-events-none -top-30 left-1/2 h-60 w-[42rem] -translate-x-1/2 opacity-60"
       />
 
-      <div className="relative z-[2] mx-auto w-full max-w-296 px-5 sm:px-7">
+      <div className="relative z-2 mx-auto w-full max-w-296 px-5 sm:px-7">
         <div className="grid gap-10 py-12 sm:py-14 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-16">
-          {/* Who we are */}
           <div className="max-w-sm">
             <Logo size="md" />
             <p className="mt-1.5 text-xs font-medium tracking-wide text-faint">
@@ -29,7 +26,6 @@ export function SiteFooter() {
             </p>
           </div>
 
-          {/* In-page nav, parked against the right edge of the footer. */}
           <nav
             aria-label="Footer"
             className="lg:justify-self-end lg:text-right"

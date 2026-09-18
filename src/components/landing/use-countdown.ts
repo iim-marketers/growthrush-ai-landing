@@ -9,17 +9,11 @@ const BLANK: TimeLeft = { d: "--", h: "--", m: "--", s: "--" };
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
-/**
- * The applications-close countdown, shared by the top bar, the offer card and
- * the closing section.
- *
- * The deadline is set from the browser's clock on mount rather than at render,
- * so the server and the first client paint agree on the placeholder and React
- * does not report a hydration mismatch.
- */
 export function useCountdown(): TimeLeft {
   const [left, setLeft] = useState<TimeLeft>(BLANK);
 
+  // Deadline is set on mount, not at render, so server and first client
+  // paint agree and React reports no hydration mismatch.
   useEffect(() => {
     const deadline =
       Date.now() +

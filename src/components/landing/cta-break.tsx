@@ -2,7 +2,6 @@ import { Frame } from "./frame";
 import { CtaButton } from "./primitives";
 import { Reveal } from "./motion-primitives";
 
-/** The wide gradient CTA band repeated between sections. */
 export function CtaBand({
   title,
   body,
@@ -29,7 +28,6 @@ export function CtaBand({
   );
 }
 
-/** The plainer centred CTA, used between the denser sections. */
 export function CtaMid({ cta, sub }: { cta: string; sub: string }) {
   return (
     <Frame className="py-3">

@@ -9,10 +9,6 @@ import { Reveal, Stagger, StaggerItem } from "./motion-primitives";
 
 type Testimonial = (typeof videoTestimonials)[number];
 
-/**
- * A testimonial card. The embed is only mounted once the viewer hits play, so
- * an unplayed page costs nothing in third-party requests.
- */
 function VideoCard({ item }: { item: Testimonial }) {
   const [playing, setPlaying] = useState(false);
   const [hinting, setHinting] = useState(false);

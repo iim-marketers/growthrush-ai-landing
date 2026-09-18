@@ -8,7 +8,10 @@ export function Hero() {
     <Frame
       className="pt-[clamp(2.4rem,5vw,4rem)] pb-[clamp(2.75rem,5vw,5rem)]"
       backdrop={
-        <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+        <div
+          className="pointer-events-none absolute inset-0 overflow-hidden"
+          aria-hidden
+        >
           <div className="glow glow-brand -top-30 -right-20 h-130 w-130" />
           <div className="glow glow-warm -bottom-35 -left-25 h-95 w-95" />
         </div>
@@ -43,7 +46,7 @@ export function Hero() {
             {hero.glance.map((item) => (
               <div
                 key={item.label}
-                className="min-w-[8.25rem] flex-1 rounded-xl border border-hairline bg-card px-4 py-3"
+                className="min-w-33 flex-1 rounded-xl border border-hairline bg-card px-4 py-3"
               >
                 <div className="text-xs text-faint">{item.label}</div>
                 <div className="mt-0.5 font-display text-base font-extrabold">
@@ -74,9 +77,10 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="relative mx-auto w-full max-w-[29rem] lg:ml-auto lg:mr-0">
+        <div className="relative mx-auto w-full max-w-116 lg:ml-auto lg:mr-0">
           <NetworkMap />
-          <span className="mt-2 block text-center text-[12.5px] text-faint lg:text-left">
+
+          <span className="mt-2 block text-center text-[12.5px] text-faint pr-22 lg:pr-28">
             {hero.mapCaption}
           </span>
         </div>

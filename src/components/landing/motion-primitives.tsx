@@ -34,7 +34,6 @@ export function Reveal({
   );
 }
 
-/** Parent that staggers its Stagger.Item children as they scroll in. */
 export function Stagger({
   children,
   className,
