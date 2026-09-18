@@ -14,8 +14,8 @@ export function Engine() {
 
       <Stagger className="mt-11 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {engine.pillars.map((pillar) => (
-          <StaggerItem key={pillar.idx}>
-            <div className="h-full rounded-2xl border border-hairline bg-card p-6 transition-all hover:-translate-y-1 hover:border-line-strong sm:p-7">
+          <StaggerItem key={pillar.idx} className="h-full">
+            <div className="flex h-full flex-col rounded-2xl border border-hairline bg-card p-6 transition-all hover:-translate-y-1 hover:border-line-strong sm:p-7">
               <div className="font-display text-[15px] font-extrabold text-orange">
                 {pillar.idx}
               </div>
@@ -23,7 +23,7 @@ export function Engine() {
                 {pillar.title}
               </h3>
               <p className="text-[15px] text-subtle">{pillar.body}</p>
-              <p className="mt-3.5 border-l-2 border-orange pl-3 text-sm">
+              <p className="mt-auto border-l-2 border-orange pl-3 pt-3.5 text-sm">
                 <b className="font-bold text-orange">You get:</b> {pillar.get}
               </p>
             </div>
