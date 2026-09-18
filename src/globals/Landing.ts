@@ -98,14 +98,6 @@ export const Landing: GlobalConfig = {
                 { name: "company", type: "text", required: true },
                 { name: "blurb", type: "textarea", required: true },
                 {
-                  type: "row",
-                  fields: [
-                    { name: "navHeading", type: "text", required: true, admin: { width: "33%" } },
-                    { name: "ctaHeading", type: "text", required: true, admin: { width: "34%" } },
-                    { name: "ctaSub", type: "text", required: true, admin: { width: "33%" } },
-                  ],
-                },
-                {
                   name: "legal",
                   type: "textarea",
                   required: true,

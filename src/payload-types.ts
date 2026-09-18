@@ -413,9 +413,6 @@ export interface Landing {
   footer: {
     company: string;
     blurb: string;
-    navHeading: string;
-    ctaHeading: string;
-    ctaSub: string;
     /**
      * Third-party brand disclaimer. Check any wording change with counsel before saving.
      */
@@ -821,9 +818,6 @@ export interface LandingSelect<T extends boolean = true> {
     | {
         company?: T;
         blurb?: T;
-        navHeading?: T;
-        ctaHeading?: T;
-        ctaSub?: T;
         legal?: T;
       };
   hero?:

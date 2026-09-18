@@ -415,9 +415,6 @@ export const footer = {
   company: "Estrellingent Technology Private Limited",
   blurb:
     "We build national distributor and franchise networks for Indian brands — territory, unit economics, partners and SOPs, installed end to end.",
-  navHeading: "Explore",
-  ctaHeading: "Ready to go national?",
-  ctaSub: "Start with the Blueprint. Limited slots each quarter.",
   legal:
     "All brand names referenced, including Haldiram, are the property of their respective owners; references describe prior professional experience and do not imply endorsement or a current commercial relationship. Confirm exact wording of any brand association with counsel before publishing.",
 } as const;
