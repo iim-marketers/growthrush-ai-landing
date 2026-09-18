@@ -1,0 +1,69 @@
+"use client";
+
+import { useState } from "react";
+import { faq } from "@/lib/landing-data";
+import { Frame, SectionTitle } from "./frame";
+import { Kicker } from "./primitives";
+import { Reveal } from "./motion-primitives";
+import { cn } from "@/lib/utils";
+
+/**
+ * One-at-a-time accordion. The answer stays in the DOM (collapsed to zero
+ * height) so it is searchable on the page and readable to assistive tech.
+ */
+export function Faq() {
+  const [open, setOpen] = useState<number | null>(null);
+
+  return (
+    <Frame id="faq" className="bg-white/2">
+      <Reveal>
+        <Kicker>{faq.kicker}</Kicker>
+        <SectionTitle>{faq.title}</SectionTitle>
+      </Reveal>
+
+      <div className="mt-10 border-t border-hairline">
+        {faq.items.map((item, i) => {
+          const isOpen = open === i;
+          return (
+            <div key={item.q} className="border-b border-hairline">
+              <h3>
+                <button
+                  type="button"
+                  onClick={() => setOpen(isOpen ? null : i)}
+                  aria-expanded={isOpen}
+                  aria-controls={`faq-panel-${i}`}
+                  className="flex w-full cursor-pointer items-center justify-between gap-5 border-0 bg-transparent py-5 text-left font-display text-[17px] font-bold sm:text-lg"
+                >
+                  {item.q}
+                  <span
+                    aria-hidden
+                    className={cn(
+                      "relative size-6 shrink-0 transition-transform duration-250",
+                      isOpen && "rotate-45",
+                    )}
+                  >
+                    <span className="absolute top-1 left-[11px] h-3.75 w-0.5 rounded-sm bg-orange" />
+                    <span className="absolute top-[11px] left-1 h-0.5 w-3.75 rounded-sm bg-orange" />
+                  </span>
+                </button>
+              </h3>
+              <div
+                id={`faq-panel-${i}`}
+                className={cn(
+                  "grid transition-[grid-template-rows] duration-300 ease-out",
+                  isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+                )}
+              >
+                <div className="overflow-hidden">
+                  <p className="max-w-[52em] pb-5 text-subtle sm:text-base">
+                    {item.a}
+                  </p>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </Frame>
+  );
+}
