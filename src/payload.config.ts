@@ -42,6 +42,12 @@ export default buildConfig({
         Button: "@/components/admin/logout-button#AdminLogoutButton",
       },
       providers: ["@/components/admin/password-reveal#PasswordReveal"],
+      views: {
+        forgot: {
+          Component:
+            "@/components/admin/forgot-password-disabled#ForgotPasswordDisabled",
+        },
+      },
     },
   },
   collections: [Users, Media],

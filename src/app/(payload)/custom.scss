@@ -31,6 +31,10 @@ html[data-theme="light"] {
   margin-bottom: 2rem;
 }
 
+.login__form > a {
+  display: none;
+}
+
 // --- Account & user edit ----------------------------------------------------
 .auth-fields {
   padding: 0;
