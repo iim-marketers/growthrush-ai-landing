@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 type FrameProps = {
+  /** The section anchor, resolved from the CMS by `@/lib/sections`. */
   id?: string;
   className?: string;
   innerClassName?: string;

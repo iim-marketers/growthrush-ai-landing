@@ -4,11 +4,11 @@ import { CheckIcon, CtaButton, Kicker } from "./primitives";
 import { Reveal } from "./motion-primitives";
 import { Countdown } from "./countdown";
 
-export async function Offer() {
+export async function Offer({ anchor }: { anchor: string }) {
   const { offer, applicationsCloseAt } = await getLandingContent();
 
   return (
-    <Frame id="offer" className="bg-white/2">
+    <Frame id={anchor} className="bg-white/2">
       <Reveal>
         <div className="flex flex-wrap items-end justify-between gap-5">
           <div>
@@ -75,7 +75,7 @@ export async function Offer() {
 
             <Countdown closesAt={applicationsCloseAt} className="mb-5" />
 
-            <CtaButton size="big" className="w-full text-center">
+            <CtaButton size="big" targetId={anchor} className="w-full text-center">
               {offer.cta}
             </CtaButton>
 

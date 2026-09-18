@@ -3,11 +3,12 @@ import { Frame } from "./frame";
 import { CheckIcon, CtaButton, Kicker } from "./primitives";
 import { NetworkMap } from "./network-map";
 
-export async function Hero() {
-  const { hero } = await getLandingContent();
+export async function Hero({ anchor }: { anchor: string }) {
+  const { hero, anchors } = await getLandingContent();
 
   return (
     <Frame
+      id={anchor}
       className="pt-[clamp(2.4rem,5vw,4rem)] pb-[clamp(2.75rem,5vw,5rem)]"
       backdrop={
         <div
@@ -59,7 +60,11 @@ export async function Hero() {
           </div>
 
           <div className="mt-7 flex flex-wrap items-center gap-3.5">
-            <CtaButton size="big" className="max-sm:w-full max-sm:text-center">
+            <CtaButton
+              size="big"
+              targetId={anchors.offer}
+              className="max-sm:w-full max-sm:text-center"
+            >
               {hero.cta}
             </CtaButton>
           </div>

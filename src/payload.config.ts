@@ -57,7 +57,11 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(dirname, "payload-types.ts"),
   },
-  db: postgresAdapter({ pool: { connectionString } }),
+  db: postgresAdapter({
+    pool: { connectionString },
+    // Lets a repair script read the database before Payload reshapes it.
+    push: process.env.PAYLOAD_SKIP_SCHEMA_PUSH !== "true",
+  }),
   sharp,
   plugins: [
     ...(blobToken

@@ -7,11 +7,17 @@ import { Kicker } from "./primitives";
 import { Reveal } from "./motion-primitives";
 import { cn } from "@/lib/utils";
 
-export function Faq({ faq }: { faq: LandingContent["faq"] }) {
+export function Faq({
+  anchor,
+  faq,
+}: {
+  anchor: string;
+  faq: LandingContent["faq"];
+}) {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <Frame id="faq" className="bg-white/2">
+    <Frame id={anchor} className="bg-white/2">
       <Reveal>
         <Kicker>{faq.kicker}</Kicker>
         <SectionTitle>{faq.title}</SectionTitle>

@@ -3,12 +3,12 @@ import { FlipNumber } from "./flip-number";
 import { Frame } from "./frame";
 import { Reveal, Stagger, StaggerItem } from "./motion-primitives";
 
-export async function ProofStats() {
+export async function ProofStats({ anchor }: { anchor: string }) {
   const { proofStats } = await getLandingContent();
 
   return (
     <Frame
-      id="proof"
+      id={anchor}
       className="border-y border-hairline bg-white/2 py-10 sm:py-12"
     >
       <Reveal>

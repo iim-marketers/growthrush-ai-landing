@@ -1,8 +1,9 @@
 # growthrush.ai — National Expansion landing page
 
 A standalone, single-page landing site for the done-for-you national expansion
-offer. Every piece of copy, every logo and the countdown deadline are edited in
-Payload CMS at `/admin`; the components hold layout only.
+offer. Every piece of copy and the countdown deadline are edited in Payload CMS
+at `/admin`; the components hold layout only. The client logo strip is the one
+exception — it reads `public/logos` straight from the codebase.
 
 ## Stack
 
@@ -27,9 +28,8 @@ pnpm dev                      # http://localhost:3000 — admin at /admin
 
 `pnpm seed` writes the original hardcoded copy from
 [`src/seed/initial-content.ts`](src/seed/initial-content.ts) into the `landing`
-global, uploads `public/logos/*` and the stand-in artwork in `src/seed/assets/`
-into the media library, and creates the admin user from `ADMIN_EMAIL` /
-`ADMIN_PASSWORD`. It is safe to re-run: media is matched by filename, the user is
+global, uploads the stand-in artwork in `src/seed/assets/` into the media
+library, and creates the admin user from `ADMIN_EMAIL` / `ADMIN_PASSWORD`. It is safe to re-run: media is matched by filename, the user is
 only created when none exists, and the global is overwritten wholesale.
 
 Payload reads `DATABASE_URL_UNPOOLED` in preference to `DATABASE_URL`. It pushes
@@ -44,7 +44,15 @@ pnpm build                    # production build (needs DATABASE_URL — the pag
 pnpm lint
 pnpm generate:types           # regenerate src/payload-types.ts after a schema change
 pnpm generate:importmap       # regenerate the admin import map after adding a custom component
+pnpm fix:nav-links            # drop navigation links whose section is gone
 ```
+
+`pnpm fix:nav-links` repairs navigation links that point at an anchor the page
+no longer has. The admin will not save one and the page will not render one, so
+this is only needed for links written straight into the database, or stored
+before these rules existed. It runs with the schema push disabled — set
+`PAYLOAD_SKIP_SCHEMA_PUSH=true` for any script that has to read the database
+before Payload reshapes it — and does nothing when every link is already valid.
 
 ## Theme
 
@@ -58,33 +66,69 @@ over. Every colour is a token: change it in `globals.css`, not in a component.
 
 ## Page structure
 
-Sections render in order from
-[`src/app/(frontend)/page.tsx`](src/app/(frontend)/page.tsx); each one lives in
-`src/components/landing/`.
+The page is composed at request time by `pageComposition()` in
+[`src/lib/sections.ts`](src/lib/sections.ts), and
+[`src/app/(frontend)/page.tsx`](src/app/(frontend)/page.tsx) renders whatever it
+returns. Each built-in section lives in `src/components/landing/`.
 
-| Section | Component | Anchor |
-| --- | --- | --- |
-| Announcement + countdown | `top-bar.tsx` | — |
-| Sticky nav | `site-nav.tsx` | — |
-| Hero + India network map | `hero.tsx`, `network-map.tsx` | — |
-| Headline stats | `proof-stats.tsx` | `#proof` |
-| Client logo strip | `logo-strip.tsx` | — |
-| Problem + revenue chart | `problem.tsx`, `revenue-chart.tsx` | — |
-| Video testimonials | `video-testimonials.tsx` | — |
-| The Expansion Engine | `engine.tsx` | `#engine` |
-| Distributor / Franchise tracks | `tracks.tsx` | `#tracks` |
-| Case studies | `case-studies.tsx` | — |
-| Fit / not a fit | `fit.tsx` | — |
-| Offer + price + countdown | `offer.tsx` | `#offer` |
-| Bonuses | `bonuses.tsx` | — |
-| Team | `team.tsx` | — |
-| Guarantee + cost of waiting | `guarantee.tsx` | — |
-| FAQ | `faq.tsx` | `#faq` |
-| Closing CTA | `final-cta.tsx` | — |
-| Sticky bottom CTA | `sticky-cta.tsx` | — |
-| Footer | `site-footer.tsx` | — |
+The order of the sections is fixed in code — it is the funnel the page was
+designed around. What the CMS controls is which of them appear and what anchor
+each one answers to.
+
+The anchors below are defaults: each section has a **Target ID** field in the
+admin, and changing it changes the `#anchor` the section renders with.
+
+| Section | Component | Default target ID | Hidden when |
+| --- | --- | --- | --- |
+| Announcement + countdown | `top-bar.tsx` | — | never |
+| Sticky nav | `site-nav.tsx` | — | never |
+| Hero + India network map | `hero.tsx`, `network-map.tsx` | `#hero` | never |
+| Headline stats | `proof-stats.tsx` | `#proof` | no proof stats |
+| Client logo strip | `logo-strip.tsx` | `#clients` | `public/logos` is empty |
+| Problem + revenue chart | `problem.tsx`, `revenue-chart.tsx` | `#problem` | never |
+| Video testimonials | `video-testimonials.tsx` | `#testimonials` | no entries |
+| The Expansion Engine | `engine.tsx` | `#engine` | no pillars |
+| Distributor / Franchise tracks | `tracks.tsx` | `#tracks` | no tracks |
+| Case studies | `case-studies.tsx` | `#case-studies` | no entries |
+| Fit / not a fit | `fit.tsx` | `#fit` | no points either side |
+| Offer + price + countdown | `offer.tsx` | `#offer` | never |
+| Bonuses | `bonuses.tsx` | `#bonuses` | no entries |
+| Team | `team.tsx` | `#team` | no paragraphs |
+| Guarantee + cost of waiting | `guarantee.tsx` | `#guarantee` | never |
+| FAQ | `faq.tsx` | `#faq` | no questions |
+| Closing CTA | `final-cta.tsx` | `#apply` | never |
+| Sticky bottom CTA | `sticky-cta.tsx` | — | never |
+| Footer | `site-footer.tsx` | — | never |
 
 `cta-break.tsx` provides the CTA bands repeated between sections.
+
+### Sections and navigation stay in step
+
+`pageComposition()` is the single pass that decides what the page contains, and
+everything else is derived from it — so a navigation link can never outlive what
+it points at:
+
+- **A section with no content is not rendered.** An empty heading is worse than
+  no section, and every link aimed at it disappears with it.
+- **In the admin**, *Chrome → Navigation links* offers a live dropdown of the
+  anchors currently on the page — the sections that still have content. It is
+  built by [`anchor-select-field.tsx`](src/components/admin/anchor-select-field.tsx),
+  which rebuilds a stand-in document from the open form and runs the same
+  `pageComposition()` over it, so the list updates as you type without a save.
+- **Target IDs must be unique** and URL-safe, checked across all sections.
+- **Renaming a target ID carries the links with it.** A `beforeValidate` hook
+  ([`follow-anchor-renames.ts`](src/lib/follow-anchor-renames.ts)) rewrites every
+  navigation link that pointed at the old anchor, so a rename is not a trap.
+- **At render time**, [`src/lib/content.ts`](src/lib/content.ts) drops any link
+  whose anchor is not on the page or is already used, so rows written straight
+  into the database cannot put a dead link there either.
+- **In the browser**, `ScrollLink` handles the click itself in every case, so a
+  link can never strand a visitor on a `/#something` URL that scrolls nowhere.
+
+Adding a section means adding it to `SECTIONS` in `src/lib/sections.ts` with its
+`anchorPath` and `contentPaths`, adding that target-ID field to
+`src/globals/Landing.ts`, and adding a case to `BuiltInSection` in `page.tsx`.
+The switch is exhaustive over `SectionId`, so a missing case is a build error.
 
 ### No route off this page
 
@@ -98,8 +142,29 @@ Everything lives in the **Landing Page** global at `/admin`, split into five
 tabs: Chrome, Hero & proof, Problem & stories, Engine & offer, Close. Saving any
 tab revalidates `/` immediately — no redeploy.
 
-- **Logos** — *Hero & proof → Client logo strip*. Upload replacements into the
-  Media collection; `alt` text is required and is what screen readers announce.
+- **Navigation links** — *Chrome → Navigation links*. Each row is a label plus a
+  section picked from a dropdown of what is currently on the page; the order here
+  is the order in the header and the footer. A section with no content cannot be
+  linked, because it is not rendered.
+- **Target IDs** — every section has one, next to its own fields, and it is what
+  a navigation link points at. Leave it blank to keep the built-in default shown
+  as the field's placeholder. Rename it and the links follow automatically.
+- **Client logos** — **not** in the CMS. The strip renders whatever image files
+  sit in [`public/logos`](public/logos), so adding a brand means dropping a file
+  in; there is nothing to upload and nothing to save. Only the heading above the
+  strip is editable, at *Hero & proof → Logo strip heading*.
+
+  [`src/lib/client-logos.ts`](src/lib/client-logos.ts) holds a map of filename →
+  display name. Its keys set the running order and its values are the `alt` text
+  a screen reader announces, because filenames alone read badly ("Ey",
+  "Centuryply"). A file that is not in the map still appears, after the listed
+  ones, named from its filename — so the map is worth an entry whenever the
+  derived name is wrong.
+
+  The page is prerendered, so the folder is read at build time. A CMS save
+  re-renders it on the server, where `public/` is not traced into the bundle by
+  default — `outputFileTracingIncludes` in `next.config.ts` puts it there, and
+  the reader falls back to the map if the folder is unreadable anyway.
 - **Countdown** — *Chrome → Applications close at* is a real date-time. The
   ticker itself is computed on the client (see `use-countdown.ts`) so server and
   client agree on the first render. Push the date forward when a new cohort

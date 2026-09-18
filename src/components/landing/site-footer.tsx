@@ -13,7 +13,7 @@ export async function SiteFooter() {
       />
       <div
         aria-hidden
-        className="glow glow-brand pointer-events-none -top-30 left-1/2 h-60 w-[42rem] -translate-x-1/2 opacity-60"
+        className="glow glow-brand pointer-events-none -top-30 left-1/2 h-60 w-2xl -translate-x-1/2 opacity-60"
       />
 
       <div className="relative z-2 mx-auto w-full max-w-296 px-5 sm:px-7">

@@ -4,11 +4,11 @@ import { Frame } from "./frame";
 import { CheckIcon, CrossIcon } from "./primitives";
 import { Reveal, Stagger, StaggerItem } from "./motion-primitives";
 
-export async function Guarantee() {
+export async function Guarantee({ anchor }: { anchor: string }) {
   const { guarantee, inaction } = await getLandingContent();
 
   return (
-    <Frame>
+    <Frame id={anchor}>
       <Reveal>
         <div className="rounded-2xl border border-success bg-success/10 px-6 py-7 sm:px-8">
           <div className="flex items-center gap-4.5">

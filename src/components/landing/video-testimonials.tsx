@@ -111,12 +111,14 @@ function VideoCard({ item }: { item: Testimonial }) {
 }
 
 export function VideoTestimonials({
+  anchor,
   videoTestimonials,
 }: {
+  anchor: string;
   videoTestimonials: LandingContent["videoTestimonials"];
 }) {
   return (
-    <Frame>
+    <Frame id={anchor}>
       <Reveal>
         <Kicker>{videoTestimonials.kicker}</Kicker>
         <SectionTitle>{videoTestimonials.title}</SectionTitle>

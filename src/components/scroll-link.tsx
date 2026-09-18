@@ -28,10 +28,12 @@ export function ScrollLink({
         return;
       }
 
+      // Falling back to the `href` when the section is missing would strand
+      // the visitor on a `/#whatever` URL that scrolls nowhere.
+      event.preventDefault();
+
       const target = document.getElementById(targetId);
       if (!target) return;
-
-      event.preventDefault();
 
       const prefersReducedMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)",
