@@ -2,13 +2,17 @@
 
 import { useReducedMotion } from "motion/react";
 
-import { problem } from "@/lib/landing-data";
+import type { LandingContent } from "@/lib/content";
 import { useInView } from "./use-in-view";
 
 const GOOD_PATH = "M64 300 C160 300 210 240 285 190 S420 92 484 55";
 const BAD_PATH = "M64 300 C160 300 220 288 300 285 S430 289 484 292";
 
-export function RevenueChart() {
+export function RevenueChart({
+  problem,
+}: {
+  problem: LandingContent["problem"];
+}) {
   const [ref, seen] = useInView<HTMLDivElement>(0.3);
   const reduced = Boolean(useReducedMotion());
   const revealed = reduced || seen;

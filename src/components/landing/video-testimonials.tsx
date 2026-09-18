@@ -2,12 +2,12 @@
 
 import { useState } from "react";
 import { Play } from "lucide-react";
-import { videoTestimonials } from "@/lib/landing-data";
+import type { LandingContent } from "@/lib/content";
 import { Frame, SectionLede, SectionTitle } from "./frame";
 import { Kicker } from "./primitives";
 import { Reveal, Stagger, StaggerItem } from "./motion-primitives";
 
-type Testimonial = (typeof videoTestimonials)[number];
+type Testimonial = LandingContent["videoTestimonials"]["items"][number];
 
 function VideoCard({ item }: { item: Testimonial }) {
   const [playing, setPlaying] = useState(false);
@@ -26,7 +26,9 @@ function VideoCard({ item }: { item: Testimonial }) {
       <div
         className="relative aspect-video overflow-hidden bg-linear-to-br from-white/6 to-card bg-cover bg-center"
         style={
-          item.poster ? { backgroundImage: `url('${item.poster}')` } : undefined
+          item.poster
+            ? { backgroundImage: `url('${item.poster.src}')` }
+            : undefined
         }
       >
         {playing && source === "youtube" ? (
@@ -79,7 +81,8 @@ function VideoCard({ item }: { item: Testimonial }) {
         {hinting && !source ? (
           <p className="absolute inset-x-0 bottom-0 z-[4] bg-background/95 px-3 py-2.5 text-xs leading-snug text-subtle">
             Add your video: set <b>youtubeId</b>, <b>vimeoId</b> or <b>mp4</b>{" "}
-            on this entry in <code>src/lib/landing-data.ts</code>.
+            on this entry under <b>Landing Page → Problem &amp; stories</b> in the
+            admin.
           </p>
         ) : null}
       </div>
@@ -107,20 +110,21 @@ function VideoCard({ item }: { item: Testimonial }) {
   );
 }
 
-export function VideoTestimonials() {
+export function VideoTestimonials({
+  videoTestimonials,
+}: {
+  videoTestimonials: LandingContent["videoTestimonials"];
+}) {
   return (
     <Frame>
       <Reveal>
-        <Kicker>Video testimonials</Kicker>
-        <SectionTitle>Hear it from the founders we&rsquo;ve scaled.</SectionTitle>
-        <SectionLede>
-          Real founders, real numbers. Tap play to watch — swap in your own
-          clips by editing one entry per card.
-        </SectionLede>
+        <Kicker>{videoTestimonials.kicker}</Kicker>
+        <SectionTitle>{videoTestimonials.title}</SectionTitle>
+        <SectionLede>{videoTestimonials.lede}</SectionLede>
       </Reveal>
 
       <Stagger className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {videoTestimonials.map((item, i) => (
+        {videoTestimonials.items.map((item, i) => (
           <StaggerItem key={i}>
             <VideoCard item={item} />
           </StaggerItem>

@@ -31,7 +31,6 @@ export function ScrollLink({
       const target = document.getElementById(targetId);
       if (!target) return;
 
-      // Preventing the default is what keeps the hash out of the URL.
       event.preventDefault();
 
       const prefersReducedMotion = window.matchMedia(

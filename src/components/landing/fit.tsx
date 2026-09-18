@@ -1,9 +1,11 @@
-import { fit } from "@/lib/landing-data";
+import { getLandingContent } from "@/lib/content";
 import { Frame, SectionTitle } from "./frame";
 import { CheckIcon, CrossIcon, FitBadge, Kicker } from "./primitives";
 import { Reveal, Stagger, StaggerItem } from "./motion-primitives";
 
-export function Fit() {
+export async function Fit() {
+  const { fit } = await getLandingContent();
+
   return (
     <Frame>
       <Reveal>

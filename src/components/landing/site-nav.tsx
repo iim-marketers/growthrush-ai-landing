@@ -1,10 +1,12 @@
 import { Logo } from "@/components/logo";
 import { ScrollLink } from "@/components/scroll-link";
 import { ScrollToTop } from "@/components/scroll-top";
-import { brand, navLinks } from "@/lib/landing-data";
+import { getLandingContent } from "@/lib/content";
 import { CtaButton } from "./primitives";
 
-export function SiteNav() {
+export async function SiteNav() {
+  const { brand, navLinks } = await getLandingContent();
+
   return (
     <nav className="sticky top-0 z-60 border-b border-hairline bg-background/80 backdrop-blur-xl">
       <div className="mx-auto flex h-17.5 max-w-296 items-center justify-between gap-4 px-5 sm:px-7">

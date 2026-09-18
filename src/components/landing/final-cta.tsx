@@ -1,11 +1,13 @@
 import { Check } from "lucide-react";
-import { finalCta } from "@/lib/landing-data";
+import { getLandingContent } from "@/lib/content";
 import { Frame } from "./frame";
 import { CtaButton, Kicker } from "./primitives";
 import { Reveal } from "./motion-primitives";
 import { Countdown } from "./countdown";
 
-export function FinalCta() {
+export async function FinalCta() {
+  const { finalCta, applicationsCloseAt } = await getLandingContent();
+
   return (
     <Frame
       className="border-t border-hairline bg-white/2"
@@ -28,7 +30,7 @@ export function FinalCta() {
           {finalCta.body}
         </p>
 
-        <Countdown className="mx-auto mb-6 max-w-107.5" />
+        <Countdown closesAt={applicationsCloseAt} className="mx-auto mb-6 max-w-107.5" />
 
         <CtaButton size="big" className="max-sm:w-full max-sm:text-center">
           {finalCta.cta}

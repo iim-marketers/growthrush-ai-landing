@@ -1,9 +1,11 @@
-import { caseStudies } from "@/lib/landing-data";
+import { getLandingContent } from "@/lib/content";
 import { Frame, SectionLede, SectionTitle } from "./frame";
 import { Kicker } from "./primitives";
 import { Reveal, Stagger, StaggerItem } from "./motion-primitives";
 
-export function CaseStudies() {
+export async function CaseStudies() {
+  const { caseStudies } = await getLandingContent();
+
   return (
     <Frame className="bg-white/2">
       <Reveal>

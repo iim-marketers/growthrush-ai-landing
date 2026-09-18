@@ -10,8 +10,14 @@ const UNITS = [
   { key: "s", label: "sec" },
 ] as const;
 
-export function Countdown({ className }: { className?: string }) {
-  const left = useCountdown();
+export function Countdown({
+  closesAt,
+  className,
+}: {
+  closesAt: string;
+  className?: string;
+}) {
+  const left = useCountdown(closesAt);
 
   return (
     <div className={cn("flex gap-2", className)}>

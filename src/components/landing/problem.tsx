@@ -1,10 +1,12 @@
-import { problem } from "@/lib/landing-data";
+import { getLandingContent } from "@/lib/content";
 import { Frame, SectionTitle } from "./frame";
 import { Kicker } from "./primitives";
 import { Reveal } from "./motion-primitives";
 import { RevenueChart } from "./revenue-chart";
 
-export function Problem() {
+export async function Problem() {
+  const { problem } = await getLandingContent();
+
   return (
     <Frame
       className=" bg-white/2"
@@ -40,7 +42,7 @@ export function Problem() {
       </Reveal>
 
       <Reveal delay={0.1}>
-        <RevenueChart />
+        <RevenueChart problem={problem} />
       </Reveal>
     </Frame>
   );

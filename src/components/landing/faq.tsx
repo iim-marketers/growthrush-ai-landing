@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { faq } from "@/lib/landing-data";
+import type { LandingContent } from "@/lib/content";
 import { Frame, SectionTitle } from "./frame";
 import { Kicker } from "./primitives";
 import { Reveal } from "./motion-primitives";
 import { cn } from "@/lib/utils";
 
-export function Faq() {
+export function Faq({ faq }: { faq: LandingContent["faq"] }) {
   const [open, setOpen] = useState<number | null>(null);
 
   return (

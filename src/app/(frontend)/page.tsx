@@ -1,3 +1,4 @@
+import { getLandingContent } from "@/lib/content";
 import { TopBar } from "@/components/landing/top-bar";
 import { SiteNav } from "@/components/landing/site-nav";
 import { Hero } from "@/components/landing/hero";
@@ -18,17 +19,27 @@ import { FinalCta } from "@/components/landing/final-cta";
 import { StickyCta } from "@/components/landing/sticky-cta";
 import { SiteFooter } from "@/components/landing/site-footer";
 
-export default function NationalExpansionPage() {
+export default async function NationalExpansionPage() {
+  const {
+    announcement,
+    applicationsCloseAt,
+    showcaseHeading,
+    showcaseBrands,
+    videoTestimonials,
+    faq,
+    stickyBar,
+  } = await getLandingContent();
+
   return (
     <>
-      <TopBar />
+      <TopBar announcement={announcement} closesAt={applicationsCloseAt} />
       <SiteNav />
       <main>
         <Hero />
         <ProofStats />
-        <LogoStrip />
+        <LogoStrip heading={showcaseHeading} showcaseBrands={showcaseBrands} />
         <Problem />
-        <VideoTestimonials />
+        <VideoTestimonials videoTestimonials={videoTestimonials} />
         <Engine />
         <Tracks />
         <CaseStudies />
@@ -37,10 +48,10 @@ export default function NationalExpansionPage() {
         <Bonuses />
         <Team />
         <Guarantee />
-        <Faq />
+        <Faq faq={faq} />
         <FinalCta />
       </main>
-      <StickyCta />
+      <StickyCta stickyBar={stickyBar} />
       <SiteFooter />
     </>
   );

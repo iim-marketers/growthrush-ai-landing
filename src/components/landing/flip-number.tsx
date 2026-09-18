@@ -2,10 +2,8 @@
 
 import { motion, useReducedMotion, type Variants } from "motion/react";
 
-/** Height of one digit cell, in em — the reel translates in multiples of this. */
 const CELL = 1.1;
 
-/** Breathing room, in em, between the last digit and whatever follows it. */
 const TAIL_GAP = 0.1;
 
 const DIGITS = [..."0123456789"];
@@ -40,7 +38,6 @@ export function FlipNumber({
 }: {
   value: string;
   className?: string;
-  /** Complete 0-9 revolutions each digit spins through before landing. */
   turns?: number;
 }) {
   const reduced = useReducedMotion();

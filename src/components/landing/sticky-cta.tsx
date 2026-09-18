@@ -1,11 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { stickyBar } from "@/lib/landing-data";
+import type { LandingContent } from "@/lib/content";
 import { CtaButton } from "./primitives";
 import { cn } from "@/lib/utils";
 
-export function StickyCta() {
+export function StickyCta({
+  stickyBar,
+}: {
+  stickyBar: LandingContent["stickyBar"];
+}) {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
