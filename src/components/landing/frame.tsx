@@ -5,7 +5,6 @@ type FrameProps = {
   id?: string;
   className?: string;
   innerClassName?: string;
-  /** Decorative layer painted behind the content, inside the section. */
   backdrop?: ReactNode;
   children: ReactNode;
 };
@@ -38,7 +37,6 @@ export function Frame({
   );
 }
 
-/** Section heading, at the one size every section uses. */
 export function SectionTitle({
   children,
   className,
@@ -58,7 +56,6 @@ export function SectionTitle({
   );
 }
 
-/** The supporting line under a section heading. */
 export function SectionLede({
   children,
   className,

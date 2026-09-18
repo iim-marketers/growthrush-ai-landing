@@ -7,10 +7,6 @@ import { Kicker } from "./primitives";
 import { Reveal } from "./motion-primitives";
 import { cn } from "@/lib/utils";
 
-/**
- * One-at-a-time accordion. The answer stays in the DOM (collapsed to zero
- * height) so it is searchable on the page and readable to assistive tech.
- */
 export function Faq() {
   const [open, setOpen] = useState<number | null>(null);
 
@@ -42,8 +38,8 @@ export function Faq() {
                       isOpen && "rotate-45",
                     )}
                   >
-                    <span className="absolute top-1 left-[11px] h-3.75 w-0.5 rounded-sm bg-orange" />
-                    <span className="absolute top-[11px] left-1 h-0.5 w-3.75 rounded-sm bg-orange" />
+                    <span className="absolute top-1 left-2.75 h-3.75 w-0.5 rounded-sm bg-orange" />
+                    <span className="absolute top-2.75 left-1 h-0.5 w-3.75 rounded-sm bg-orange" />
                   </span>
                 </button>
               </h3>

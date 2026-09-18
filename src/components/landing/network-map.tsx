@@ -12,17 +12,9 @@ import {
   routes,
 } from "./india-map-data";
 
-/**
- * The hero's animated map: one hub radiating routes to a national network.
- *
- * Routes draw themselves in with a stroke-dash sweep and the nodes pop in
- * behind them, both staggered by index. The whole thing waits until it scrolls
- * into view, and renders in its final state under `prefers-reduced-motion`.
- */
 export function NetworkMap() {
   const [ref, seen] = useInView<SVGSVGElement>(0.25);
   const reduced = useReducedMotion();
-  // Under reduced motion the map is simply drawn in its final state.
   const revealed = Boolean(reduced) || seen;
 
   return (
@@ -134,10 +126,6 @@ export function NetworkMap() {
                 }}
               />
               {labelled ? (
-                /*
-                 * The hub is labelled underneath rather than beside it: to its
-                 * right the text runs straight through the Raipur node.
-                 */
                 <text
                   x={isHub ? x : x + (anchorStart ? 12 : -12)}
                   y={isHub ? y + 30 : y + 4}

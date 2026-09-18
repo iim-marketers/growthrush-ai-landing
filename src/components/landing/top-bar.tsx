@@ -3,7 +3,6 @@
 import { announcement } from "@/lib/landing-data";
 import { useCountdown } from "./use-countdown";
 
-/** Announcement strip above the nav, with the applications-close countdown. */
 export function TopBar() {
   const left = useCountdown();
 

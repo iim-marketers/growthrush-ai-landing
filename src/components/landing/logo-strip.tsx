@@ -5,12 +5,11 @@ import { showcaseBrands } from "@/lib/landing-data";
 import { Frame } from "./frame";
 import { Reveal, Stagger, StaggerItem } from "./motion-primitives";
 
-/** The real client logos, carried over from the main growthrush.ai app. */
 export function LogoStrip() {
   return (
     <Frame className="border-b border-hairline py-12 sm:py-14">
       <Reveal>
-        <p className="mb-5 text-center text-[12.5px] tracking-[0.05em] text-faint uppercase">
+        <p className="mb-5 text-center text-[12.5px] tracking-wider text-faint uppercase">
           Expansion experience across brands
         </p>
       </Reveal>

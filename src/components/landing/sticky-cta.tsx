@@ -5,10 +5,6 @@ import { stickyBar } from "@/lib/landing-data";
 import { CtaButton } from "./primitives";
 import { cn } from "@/lib/utils";
 
-/**
- * Bottom CTA bar. Appears once the hero is well out of view and hides again
- * near the foot of the page, where the closing CTA takes over.
- */
 export function StickyCta() {
   const [show, setShow] = useState(false);
 

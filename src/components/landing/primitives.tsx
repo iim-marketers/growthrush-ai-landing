@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { ScrollLink } from "@/components/scroll-link";
 import { cn } from "@/lib/utils";
 
-/** The small orange pill that labels each section. */
 export function Kicker({
   children,
   className,
@@ -26,10 +25,6 @@ export function Kicker({
   );
 }
 
-/**
- * The primary call to action. Always an in-page anchor — the landing page
- * deliberately has no route off it.
- */
 export function CtaButton({
   children,
   targetId = "offer",
@@ -47,8 +42,6 @@ export function CtaButton({
       className={cn(
         "btn-cta relative h-auto overflow-hidden rounded-full font-display font-bold text-white",
         "transition-transform hover:-translate-y-0.5 active:translate-y-0",
-        // Sized up from the phone: the full-desktop padding made these
-        // overwhelm a narrow bar, so each size starts smaller and grows at sm.
         size === "big"
           ? "px-5 py-3 text-[15px] sm:px-7 sm:py-4 sm:text-base md:text-[17px]"
           : "px-4 py-2.5 text-sm sm:px-6 sm:py-3 sm:text-[15px]",
@@ -60,7 +53,6 @@ export function CtaButton({
   );
 }
 
-/** Green tick used down every benefit list. */
 export function CheckIcon({ className }: { className?: string }) {
   return (
     <span
@@ -75,7 +67,6 @@ export function CheckIcon({ className }: { className?: string }) {
   );
 }
 
-/** Muted cross, for the "not for you" and "if you wait" lists. */
 export function CrossIcon({ className }: { className?: string }) {
   return (
     <span
@@ -90,7 +81,6 @@ export function CrossIcon({ className }: { className?: string }) {
   );
 }
 
-/** Square badge that heads the two "fit" columns. */
 export function FitBadge({ tone }: { tone: "yes" | "no" }) {
   const Icon = tone === "yes" ? Check : Minus;
   return (

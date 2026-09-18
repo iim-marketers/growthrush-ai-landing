@@ -2,12 +2,6 @@
 
 import { useCallback, type AnchorHTMLAttributes, type MouseEvent } from "react";
 
-/**
- * Anchor that returns to the top of the page. `#top` is the spec's fallback
- * fragment for the document root, so this still works as a plain jump before
- * hydration; once hydrated it scrolls smoothly and keeps the hash out of the
- * URL, the same way {@link ScrollLink} does for in-page sections.
- */
 export function ScrollToTop({
   onClick,
   children,
@@ -17,7 +11,6 @@ export function ScrollToTop({
     (event: MouseEvent<HTMLAnchorElement>) => {
       onClick?.(event);
       if (event.defaultPrevented) return;
-      // Let cmd/ctrl/middle clicks open a new tab the way the browser wants.
       if (
         event.metaKey ||
         event.ctrlKey ||
@@ -28,6 +21,7 @@ export function ScrollToTop({
         return;
       }
 
+      // Preventing the default is what keeps the hash out of the URL.
       event.preventDefault();
 
       const prefersReducedMotion = window.matchMedia(

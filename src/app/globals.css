@@ -4,13 +4,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* ------------------------------------------------------------------
-   growthrush.ai design tokens — the same palette as the main app
-   (src/app/globals.css there). The landing is dark-only, so the
-   `.theme-light` block from the app is deliberately not carried over.
-   ------------------------------------------------------------------ */
 :root {
-  /* brand surface */
   --bg-color: #050814;
   --card-bg: #060d1d;
   --text-primary: #ffffff;
@@ -34,7 +28,6 @@
   --glow-brand: rgba(91, 127, 255, 0.15);
   --glow-warm: rgba(249, 115, 22, 0.08);
 
-  /* Palette-specific shadcn values. The derived ones are shared, below. */
   --radius: 0.75rem;
   --popover: #0a0f24;
   --secondary: rgba(255, 255, 255, 0.06);
@@ -87,7 +80,6 @@
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
 
-  /* brand-named utilities: bg-brand, text-brand, border-brand … */
   --color-brand: var(--brand);
   --color-brand-soft: var(--brand-soft);
   --color-ink: var(--text-primary);
@@ -142,16 +134,12 @@
 }
 
 @layer utilities {
-  /*
-   * Full-bleed shell. `clip` rather than `hidden`: `overflow-x: hidden` forces
-   * `overflow-y: auto`, which would turn the shell into a scroll container.
-   */
   .app-shell {
     @apply relative min-h-dvh w-full bg-background;
+    /* `clip`, not `hidden`: overflow-x: hidden forces overflow-y: auto. */
     overflow-x: clip;
   }
 
-  /* Soft radial glows behind the sections. */
   .glow {
     @apply pointer-events-none absolute z-0 rounded-full;
   }
@@ -169,12 +157,10 @@
     box-shadow: 0 6px 20px rgba(91, 127, 255, 0.5);
   }
 
-  /* Tabular digits so the countdown does not jitter as it ticks. */
   .tabular {
     font-variant-numeric: tabular-nums;
   }
 
-  /* The primary CTA: a glowing brand-blue pill with a slow shine sweep. */
   .btn-cta {
     background: linear-gradient(180deg, #7d9bff 0%, var(--brand) 100%);
     border: 1.4px solid rgba(168, 192, 255, 0.55);
@@ -250,7 +236,6 @@
   }
 }
 
-/* Honour the OS "reduce motion" setting for the ambient animations. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

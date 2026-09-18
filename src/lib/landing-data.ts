@@ -1,17 +1,9 @@
-/**
- * Every string and number on the national-expansion landing page.
- *
- * Static for now — this is the shape Payload CMS will fill later, so keep
- * copy out of the components and in here.
- */
-
 export const brand = {
   name: "growthrush",
   suffix: ".ai",
   tagline: "Expansion Partners",
 } as const;
 
-/** In-page nav. Anchors only — the landing never links back to the main app. */
 export const navLinks = [
   { label: "The Engine", targetId: "engine" },
   { label: "Tracks", targetId: "tracks" },
@@ -25,7 +17,6 @@ export const announcement = {
   countdownLabel: "Applications close in",
 } as const;
 
-/** How far out the countdown runs, from first paint. */
 export const countdownOffset = {
   days: 6,
   hours: 8,
@@ -51,6 +42,8 @@ export const hero = {
   ctaNote: "Fixed scope. Credited in full to the done-for-you engagement.",
   credential: {
     initial: "H",
+    logo: "/logos/haldiram.png",
+    logoAlt: "Haldiram's",
     headline: "The team behind Haldiram's national rollout.",
     body: "10+ years · 300+ brands · 5000+ distributors & franchises.",
   },
@@ -64,7 +57,6 @@ export const proofStats = [
   { value: "₹250 Cr", label: "Channel revenue influenced" },
 ] as const;
 
-/** The real client logos, carried over from the main app's public/logos. */
 export const showcaseBrands = [
   { name: "Haldiram's", src: "/logos/haldiram.png" },
   { name: "EY", src: "/logos/ey.png" },
@@ -98,11 +90,6 @@ export const problem = {
   chartBad: "Expanding the wrong way",
 } as const;
 
-/**
- * Video testimonials. Set exactly one of `youtubeId` / `vimeoId` / `mp4` on a
- * card to make it playable; leave all three empty and the card shows the
- * "add your video" hint instead. `poster` is optional.
- */
 export const videoTestimonials = [
   {
     name: "[Name]",
@@ -418,7 +405,6 @@ export const finalCta = {
   trust: ["Fixed scope", "Credited to the engagement", "Limited slots"],
 } as const;
 
-/** The CTA bands and centred CTAs repeated down the page. */
 export const ctaBands = {
   afterTestimonials: {
     title: "Not sure where your expansion is leaking?",
@@ -452,7 +438,6 @@ export const stickyBar = {
 } as const;
 
 export const footer = {
-  /** The registered entity, shown in the copyright line. */
   company: "Estrellingent Technology Private Limited",
   blurb:
     "We build national distributor and franchise networks for Indian brands — territory, unit economics, partners and SOPs, installed end to end.",

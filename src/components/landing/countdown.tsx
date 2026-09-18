@@ -10,7 +10,6 @@ const UNITS = [
   { key: "s", label: "sec" },
 ] as const;
 
-/** The four-box countdown used in the offer card and the closing section. */
 export function Countdown({ className }: { className?: string }) {
   const left = useCountdown();
 
