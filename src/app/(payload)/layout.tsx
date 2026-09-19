@@ -1,4 +1,5 @@
 /* THIS FILE IS OWNED BY PAYLOAD */
+import type { Viewport } from "next";
 import type { ServerFunctionClient } from "payload";
 
 import config from "@payload-config";
@@ -11,6 +12,13 @@ import "./custom.scss";
 
 type Args = {
   children: React.ReactNode;
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#f5f6fa",
+  colorScheme: "light",
 };
 
 const serverFunction: ServerFunctionClient = async function (args) {
