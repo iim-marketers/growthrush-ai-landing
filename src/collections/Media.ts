@@ -1,5 +1,10 @@
 import type { CollectionConfig } from "payload";
 
+import {
+  revalidateLandingOnMediaChange,
+  revalidateLandingOnMediaDelete,
+} from "@/lib/revalidate-landing";
+
 export const Media: CollectionConfig = {
   slug: "media",
   admin: {
@@ -9,6 +14,10 @@ export const Media: CollectionConfig = {
   },
   access: {
     read: () => true,
+  },
+  hooks: {
+    afterChange: [revalidateLandingOnMediaChange],
+    afterDelete: [revalidateLandingOnMediaDelete],
   },
   upload: {
     staticDir: "public/media",

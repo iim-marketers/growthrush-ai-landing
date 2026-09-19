@@ -1,16 +1,32 @@
-import type { GlobalAfterChangeHook } from "payload";
+import type {
+  CollectionAfterChangeHook,
+  CollectionAfterDeleteHook,
+  GlobalAfterChangeHook,
+} from "payload";
 import { revalidatePath } from "next/cache";
 
-export const revalidateLanding: GlobalAfterChangeHook = ({ doc, req }) => {
+// No `type` argument: `"page"` would build the tag `_N_T_/page`, but the page is
+// cached under `_N_T_/(frontend)/page` and the purge silently misses.
+const revalidateLandingPage = (log: (message: string) => void) => {
   try {
-    revalidatePath("/", "page");
-    req.payload.logger.info("Landing page content saved — revalidated /");
+    revalidatePath("/");
+    log("Landing page content saved — revalidated /");
   } catch {
-    // `revalidatePath` needs Next's request store, which the seed script,
-    // migrations and other CLI entry points do not have. Nothing is cached in
-    // those contexts either, so there is nothing to invalidate.
-    req.payload.logger.info("Landing page content saved — outside a request, skipping revalidation");
+    log("Landing page content saved — outside a request, skipping revalidation");
   }
+};
 
+export const revalidateLanding: GlobalAfterChangeHook = ({ doc, req }) => {
+  revalidateLandingPage((message) => req.payload.logger.info(message));
+  return doc;
+};
+
+export const revalidateLandingOnMediaChange: CollectionAfterChangeHook = ({ doc, req }) => {
+  revalidateLandingPage((message) => req.payload.logger.info(message));
+  return doc;
+};
+
+export const revalidateLandingOnMediaDelete: CollectionAfterDeleteHook = ({ doc, req }) => {
+  revalidateLandingPage((message) => req.payload.logger.info(message));
   return doc;
 };
