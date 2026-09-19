@@ -4,14 +4,6 @@ export const brand = {
   tagline: "Expansion Partners",
 } as const;
 
-export const navLinks = [
-  { label: "The Engine", targetId: "engine" },
-  { label: "Tracks", targetId: "tracks" },
-  { label: "Proof", targetId: "proof" },
-  { label: "Offer", targetId: "offer" },
-  { label: "FAQ", targetId: "faq" },
-] as const;
-
 export const announcement = {
   live: "Now onboarding the Q3 cohort — limited slots",
   countdownLabel: "Applications close in",
@@ -42,8 +34,6 @@ export const hero = {
   ctaNote: "Fixed scope. Credited in full to the done-for-you engagement.",
   credential: {
     initial: "H",
-    logo: "/logos/haldiram.png",
-    logoAlt: "Haldiram's",
     headline: "The team behind Haldiram's national rollout.",
     body: "10+ years · 300+ brands · 5000+ distributors & franchises.",
   },
@@ -55,20 +45,6 @@ export const proofStats = [
   { value: "5000+", label: "Distributors & franchises" },
   { value: "10+ Yrs", label: "In market" },
   { value: "₹250 Cr", label: "Channel revenue influenced" },
-] as const;
-
-export const showcaseBrands = [
-  { name: "Haldiram's", src: "/logos/haldiram.png" },
-  { name: "EY", src: "/logos/ey.png" },
-  { name: "Emami", src: "/logos/emami.png" },
-  { name: "ITC", src: "/logos/itc.png" },
-  { name: "Joy", src: "/logos/joy.png" },
-  { name: "Nephrocare", src: "/logos/nephrocare.png" },
-  { name: "Adyant Ayurveda", src: "/logos/adyant-ayurveda.png" },
-  { name: "Emporium Solutions", src: "/logos/emporium-solutions.png" },
-  { name: "Pepsi", src: "/logos/pepsi.png" },
-  { name: "Magik LED", src: "/logos/magik-led.png" },
-  { name: "Century Ply", src: "/logos/centuryply.png" },
 ] as const;
 
 export const problem = {

@@ -21,7 +21,7 @@ export const Landing: GlobalConfig = {
       tabs: [
         {
           label: "Chrome",
-          description: "Brand, navigation, announcement bar, sticky CTA, footer.",
+          description: "Brand, announcement bar, sticky CTA, footer.",
           fields: [
             {
               name: "brand",
@@ -38,26 +38,6 @@ export const Landing: GlobalConfig = {
                       admin: { width: "33%", description: "Rendered in the accent colour, e.g. .ai" },
                     },
                     { name: "tagline", type: "text", required: true, admin: { width: "33%" } },
-                  ],
-                },
-              ],
-            },
-            {
-              name: "navLinks",
-              type: "array",
-              label: "Navigation links",
-              minRows: 1,
-              admin: {
-                initCollapsed: true,
-                description:
-                  "Section ID must match an id rendered on the page (engine, tracks, proof, offer, faq).",
-              },
-              fields: [
-                {
-                  type: "row",
-                  fields: [
-                    { name: "label", type: "text", required: true, admin: { width: "50%" } },
-                    { name: "targetId", type: "text", required: true, admin: { width: "50%" } },
                   ],
                 },
               ],
@@ -146,17 +126,11 @@ export const Landing: GlobalConfig = {
                   label: "Credential card",
                   fields: [
                     {
-                      type: "row",
-                      fields: [
-                        {
-                          name: "initial",
-                          type: "text",
-                          required: true,
-                          maxLength: 1,
-                          admin: { width: "20%", description: "Fallback letter if the logo fails to load." },
-                        },
-                        { name: "logo", type: "upload", relationTo: "media", admin: { width: "80%" } },
-                      ],
+                      name: "initial",
+                      type: "text",
+                      required: true,
+                      maxLength: 1,
+                      admin: { description: "Monogram shown on the credential card." },
                     },
                     { name: "headline", type: "text", required: true },
                     { name: "body", type: "text", required: true },
@@ -171,29 +145,10 @@ export const Landing: GlobalConfig = {
               type: "text",
               required: true,
               label: "Logo strip heading",
-              admin: { description: "Small label above the client logo row." },
-            },
-            {
-              name: "showcaseBrands",
-              type: "array",
-              label: "Client logo strip",
-              minRows: 1,
-              admin: { initCollapsed: true },
-              fields: [
-                {
-                  type: "row",
-                  fields: [
-                    { name: "name", type: "text", required: true, admin: { width: "50%" } },
-                    {
-                      name: "logo",
-                      type: "upload",
-                      relationTo: "media",
-                      required: true,
-                      admin: { width: "50%" },
-                    },
-                  ],
-                },
-              ],
+              admin: {
+                description:
+                  "Small label above the client logo row. The logos themselves come from public/logos.",
+              },
             },
           ],
         },

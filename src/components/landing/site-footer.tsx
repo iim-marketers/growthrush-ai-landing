@@ -1,9 +1,10 @@
 import { Logo } from "@/components/logo";
 import { ScrollLink } from "@/components/scroll-link";
 import { getLandingContent } from "@/lib/content";
+import { navLinks } from "@/lib/nav-links";
 
 export async function SiteFooter() {
-  const { brand, footer, navLinks } = await getLandingContent();
+  const { brand, footer } = await getLandingContent();
 
   return (
     <footer className="relative border-t border-hairline bg-background">
