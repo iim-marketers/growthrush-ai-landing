@@ -2,10 +2,11 @@ import { Logo } from "@/components/logo";
 import { ScrollLink } from "@/components/scroll-link";
 import { ScrollToTop } from "@/components/scroll-top";
 import { getLandingContent } from "@/lib/content";
+import { navLinks } from "@/lib/nav-links";
 import { CtaButton } from "./primitives";
 
 export async function SiteNav() {
-  const { brand, navLinks } = await getLandingContent();
+  const { brand } = await getLandingContent();
 
   return (
     <nav className="sticky top-0 z-60 border-b border-hairline bg-background/80 backdrop-blur-xl">

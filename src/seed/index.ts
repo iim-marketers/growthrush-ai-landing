@@ -61,18 +61,7 @@ if (userCount === 0) {
   }
 }
 
-const fromPublic = (p: string) => path.join(projectRoot, "public", p.replace(/^\//, ""));
 const fromAssets = (p: string) => path.join(projectRoot, "src/seed/assets", p);
-
-const brandLogos = new Map<string, number>();
-for (const brand of c.showcaseBrands) {
-  brandLogos.set(brand.name, await upload(fromPublic(brand.src), brand.name));
-}
-
-const credentialLogo = await upload(
-  fromPublic(c.hero.credential.logo),
-  c.hero.credential.logoAlt,
-);
 
 const posters: number[] = [];
 for (let i = 1; i <= 3; i++) {
@@ -92,7 +81,6 @@ await payload.updateGlobal({
   slug: "landing",
   data: {
     brand: { ...c.brand },
-    navLinks: c.navLinks.map(({ label, targetId }) => ({ label, targetId })),
     announcement: { ...c.announcement },
     applicationsCloseAt,
     stickyBar: { ...c.stickyBar },
@@ -102,19 +90,10 @@ await payload.updateGlobal({
       ...c.hero,
       checks: list(c.hero.checks),
       glance: stats(c.hero.glance),
-      credential: {
-        initial: c.hero.credential.initial,
-        logo: credentialLogo,
-        headline: c.hero.credential.headline,
-        body: c.hero.credential.body,
-      },
+      credential: { ...c.hero.credential },
     },
     proofStats: stats(c.proofStats),
     showcaseHeading: "Expansion experience across brands",
-    showcaseBrands: c.showcaseBrands.map((brand) => ({
-      name: brand.name,
-      logo: brandLogos.get(brand.name)!,
-    })),
 
     problem: { ...c.problem, wall: list(c.problem.wall) },
     videoTestimonials: {

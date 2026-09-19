@@ -387,16 +387,6 @@ export interface Landing {
     suffix: string;
     tagline: string;
   };
-  /**
-   * Section ID must match an id rendered on the page (engine, tracks, proof, offer, faq).
-   */
-  navLinks?:
-    | {
-        label: string;
-        targetId: string;
-        id?: string | null;
-      }[]
-    | null;
   announcement: {
     live: string;
     countdownLabel: string;
@@ -452,10 +442,9 @@ export interface Landing {
     ctaNote: string;
     credential: {
       /**
-       * Fallback letter if the logo fails to load.
+       * Monogram shown on the credential card.
        */
       initial: string;
-      logo?: (number | null) | Media;
       headline: string;
       body: string;
     };
@@ -475,16 +464,9 @@ export interface Landing {
       }[]
     | null;
   /**
-   * Small label above the client logo row.
+   * Small label above the client logo row. The logos themselves come from public/logos.
    */
   showcaseHeading: string;
-  showcaseBrands?:
-    | {
-        name: string;
-        logo: number | Media;
-        id?: string | null;
-      }[]
-    | null;
   problem: {
     /**
      * Small eyebrow label above the title.
@@ -792,13 +774,6 @@ export interface LandingSelect<T extends boolean = true> {
         suffix?: T;
         tagline?: T;
       };
-  navLinks?:
-    | T
-    | {
-        label?: T;
-        targetId?: T;
-        id?: T;
-      };
   announcement?:
     | T
     | {
@@ -846,7 +821,6 @@ export interface LandingSelect<T extends boolean = true> {
           | T
           | {
               initial?: T;
-              logo?: T;
               headline?: T;
               body?: T;
             };
@@ -860,13 +834,6 @@ export interface LandingSelect<T extends boolean = true> {
         id?: T;
       };
   showcaseHeading?: T;
-  showcaseBrands?:
-    | T
-    | {
-        name?: T;
-        logo?: T;
-        id?: T;
-      };
   problem?:
     | T
     | {

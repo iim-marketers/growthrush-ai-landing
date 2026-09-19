@@ -24,7 +24,6 @@ export default async function NationalExpansionPage() {
     announcement,
     applicationsCloseAt,
     showcaseHeading,
-    showcaseBrands,
     videoTestimonials,
     faq,
     stickyBar,
@@ -37,7 +36,7 @@ export default async function NationalExpansionPage() {
       <main>
         <Hero />
         <ProofStats />
-        <LogoStrip heading={showcaseHeading} showcaseBrands={showcaseBrands} />
+        <LogoStrip heading={showcaseHeading} />
         <Problem />
         <VideoTestimonials videoTestimonials={videoTestimonials} />
         <Engine />

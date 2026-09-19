@@ -33,7 +33,6 @@ const toStats = (
 
 const normalize = (doc: Landing) => ({
   brand: doc.brand,
-  navLinks: (doc.navLinks ?? []).map(({ label, targetId }) => ({ label, targetId })),
   announcement: doc.announcement,
   applicationsCloseAt: doc.applicationsCloseAt,
   stickyBar: doc.stickyBar,
@@ -43,17 +42,10 @@ const normalize = (doc: Landing) => ({
     ...doc.hero,
     checks: toStrings(doc.hero.checks),
     glance: toStats(doc.hero.glance),
-    credential: {
-      ...doc.hero.credential,
-      logo: toImg(doc.hero.credential.logo),
-    },
+    credential: { ...doc.hero.credential },
   },
   proofStats: toStats(doc.proofStats),
   showcaseHeading: doc.showcaseHeading,
-  showcaseBrands: (doc.showcaseBrands ?? []).flatMap((entry) => {
-    const logo = toImg(entry.logo);
-    return logo ? [{ name: entry.name, logo }] : [];
-  }),
 
   problem: {
     ...doc.problem,
