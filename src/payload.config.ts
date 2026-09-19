@@ -10,6 +10,7 @@ import sharp from "sharp";
 import { Media } from "./collections/Media";
 import { Users } from "./collections/Users";
 import { Landing } from "./globals/Landing";
+import { ADMIN_ICONS, ADMIN_TITLE_SUFFIX } from "./lib/admin-metadata";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -30,8 +31,9 @@ export default buildConfig({
     importMap: { baseDir: path.resolve(dirname) },
     theme: "light",
     meta: {
-      titleSuffix: " · growthrush.ai",
-      icons: [{ rel: "icon", type: "image/png", url: "/brand/admin-icon.png" }],
+      titleSuffix: ADMIN_TITLE_SUFFIX,
+      icons: ADMIN_ICONS,
+      defaultOGImageType: "off",
     },
     components: {
       graphics: {
